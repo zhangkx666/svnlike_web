@@ -1,0 +1,314 @@
+@import "color.less";
+
+@color-dark-header: #393D49;
+
+// theme: dark, light
+.dark {
+  .header {
+    background: @color-dark-header;
+  }
+
+  .color-contrast {
+    color: #ffffff !important;
+  }
+
+  .dark-no-border .ant-input {
+    &:hover {
+      border-color: @color-dark-header !important;
+    }
+
+    &:focus {
+      border-color: @color-dark-header !important;
+      box-shadow: none;
+    }
+  }
+}
+
+.light {
+  .header {
+    background: #F2F2F2;
+    //border-bottom: 1px solid #dedede;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .2);
+  }
+
+  .color-contrast {
+    color: @color-dark-header !important;
+  }
+}
+
+// color: blue, green, orange, purple
+span.blue,
+div.blue {
+  background-color: @color-blue;
+}
+
+.blue {
+  .color-color {
+    color: @color-blue;
+  }
+
+  .color-color-bg {
+    background-color: @color-blue;
+  }
+
+  button {
+    background-color: @color-blue;
+    border-color: @color-blue;
+
+    &:hover {
+      background-color: @color-blue-hover;
+      border-color: @color-blue-hover;
+    }
+
+    &.ant-switch {
+      background-color: rgba(0, 0, 0, .25);
+      border: 1px solid transparent;
+
+      &.ant-switch-checked {
+        background-color: @color-blue;
+        border-color: @color-blue;
+
+        &:hover {
+          background-color: @color-blue-hover;
+          border-color: @color-blue-hover;
+        }
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .25);
+        border: 1px solid transparent;
+      }
+    }
+  }
+
+  .menu-item {
+    &.active {
+      color: @color-blue-hover !important;
+      background-color: #dff5ff !important;
+    }
+
+    &:hover {
+      background-color: #dff5ff;
+    }
+  }
+
+  .ant-input {
+    &:hover {
+      border-color: @color-blue !important;
+    }
+
+    &:focus {
+      border-color: @color-blue !important;
+      box-shadow: 0 0 0 2px rgba(@color-blue, 0.2);
+    }
+  }
+}
+
+span.green,
+div.green{
+  background-color: @color-green;
+}
+
+.green {
+  .color-color {
+    color: @color-green;
+  }
+
+  .color-color-bg {
+    background-color: @color-green;
+  }
+
+  button {
+    background-color: @color-green;
+    border-color: @color-green;
+
+    &:hover {
+      background-color: @color-green-hover;
+      border-color: @color-green-hover;
+    }
+
+    &.ant-switch {
+      background-color: rgba(0, 0, 0, .25);
+      border: 1px solid transparent;
+
+      &.ant-switch-checked {
+        background-color: @color-green;
+        border-color: @color-green;
+
+        &:hover {
+          background-color: @color-green-hover;
+          border-color: @color-green-hover;
+        }
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .25);
+        border: 1px solid transparent;
+      }
+    }
+  }
+
+  .menu-item {
+    &.active {
+      color: @color-green-hover !important;
+      background-color: #edf8e0 !important;
+    }
+
+    &:hover {
+      background-color: #edf8e0;
+    }
+  }
+
+  .ant-input {
+    &:hover {
+      border-color: @color-green !important;
+    }
+
+    &:focus {
+      border-color: @color-green !important;
+      box-shadow: 0 0 0 2px rgba(@color-green, 0.2);
+    }
+  }
+}
+
+span.orange,
+div.orange{
+  background-color: @color-orange;
+}
+
+.orange {
+  .color-color {
+    color: @color-orange;
+  }
+
+  .color-color-bg {
+    background-color: @color-orange;
+  }
+
+  a {
+    color: @color-orange;
+  }
+
+  button {
+    background-color: @color-orange;
+    border-color: @color-orange;
+
+    &:hover {
+      background-color: @color-orange-hover;
+      border-color: @color-orange-hover;
+    }
+
+    &.ant-switch {
+      background-color: rgba(0, 0, 0, .25);
+      border: 1px solid transparent;
+
+      &.ant-switch-checked {
+        background-color: @color-orange;
+        border-color: @color-orange;
+
+        &:hover {
+          background-color: @color-orange-hover;
+          border-color: @color-orange-hover;
+        }
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .25);
+        border: 1px solid transparent;
+      }
+    }
+  }
+
+  .menu-item {
+    &.active {
+      color: @color-orange-hover !important;
+      background-color: #FFFBE6 !important;
+    }
+
+    &:hover {
+      background-color: #FFFBE6;
+    }
+  }
+
+  .ant-input {
+    &:hover {
+      border-color: @color-orange !important;
+    }
+
+    &:focus {
+      border-color: @color-orange !important;
+      box-shadow: 0 0 0 2px rgba(@color-orange, 0.2);
+    }
+  }
+}
+
+span.purple,
+div.purple{
+  background-color: @color-purple;
+}
+
+.purple {
+  .color-color {
+    color: @color-purple;
+  }
+
+  .color-color-bg {
+    background-color: @color-purple;
+  }
+
+  a {
+    color: @color-purple;
+  }
+
+  button {
+    background-color: @color-purple;
+    border-color: @color-purple;
+
+    &:hover {
+      background-color: @color-purple-hover;
+      border-color: @color-purple-hover;
+    }
+
+    &.ant-switch {
+      background-color: rgba(0, 0, 0, .25);
+      border: 1px solid transparent;
+
+      &.ant-switch-checked {
+        background-color: @color-purple;
+        border-color: @color-purple;
+
+        &:hover {
+          background-color: @color-purple-hover;
+          border-color: @color-purple-hover;
+        }
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .25);
+        border: 1px solid transparent;
+      }
+    }
+  }
+
+  .menu-item {
+    &.active {
+      color: @color-purple-hover !important;
+      background-color: #F9F0FF !important;
+    }
+
+    &:hover {
+      background-color: #F9F0FF;
+    }
+  }
+
+  .ant-input {
+    &:hover {
+      border-color: @color-purple !important;
+    }
+
+    &:focus {
+      border-color: @color-purple !important;
+      box-shadow: 0 0 0 2px rgba(@color-purple, 0.2);
+    }
+  }
+}
