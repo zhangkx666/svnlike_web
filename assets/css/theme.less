@@ -1,7 +1,5 @@
 @import "color.less";
 
-@color-dark-header: #393D49;
-
 // theme: dark, light
 .dark {
   .header {
@@ -9,7 +7,11 @@
   }
 
   .color-contrast {
-    color: #ffffff !important;
+    color: #fff !important;
+  }
+
+  .logo-icon:before {
+    color: #fff;
   }
 
   .dark-no-border .ant-input {
@@ -27,18 +29,21 @@
 .light {
   .header {
     background: #F2F2F2;
-    //border-bottom: 1px solid #dedede;
-    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .2);
+    border-bottom: 1px solid #e5e5e5;
+    //box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .2);
   }
 
   .color-contrast {
     color: @color-dark-header !important;
   }
+
+  //.logo-icon:before {
+  //  color: @color-dark-header;
+  //}
 }
 
 // color: blue, green, orange, purple
-span.blue,
-div.blue {
+span.blue {
   background-color: @color-blue;
 }
 
@@ -51,7 +56,7 @@ div.blue {
     background-color: @color-blue;
   }
 
-  button {
+  .btn-x {
     background-color: @color-blue;
     border-color: @color-blue;
 
@@ -92,6 +97,14 @@ div.blue {
     }
   }
 
+  .menu-x {
+    .nuxt-link-exact-active {
+      background: @color-blue-bg-light !important;
+      border-right-color: @color-blue;
+      color: @color-blue !important;
+    }
+  }
+
   .ant-input {
     &:hover {
       border-color: @color-blue !important;
@@ -104,8 +117,7 @@ div.blue {
   }
 }
 
-span.green,
-div.green{
+span.green {
   background-color: @color-green;
 }
 
@@ -118,7 +130,7 @@ div.green{
     background-color: @color-green;
   }
 
-  button {
+  .btn-x {
     background-color: @color-green;
     border-color: @color-green;
 
@@ -159,6 +171,14 @@ div.green{
     }
   }
 
+  .menu-x {
+    .nuxt-link-exact-active {
+      background: @color-green-bg-light !important;
+      border-right-color: @color-green;
+      color: @color-green !important;
+    }
+  }
+
   .ant-input {
     &:hover {
       border-color: @color-green !important;
@@ -171,8 +191,7 @@ div.green{
   }
 }
 
-span.orange,
-div.orange{
+span.orange {
   background-color: @color-orange;
 }
 
@@ -189,7 +208,7 @@ div.orange{
     color: @color-orange;
   }
 
-  button {
+  .btn-x {
     background-color: @color-orange;
     border-color: @color-orange;
 
@@ -230,6 +249,14 @@ div.orange{
     }
   }
 
+  .menu-x {
+    .nuxt-link-exact-active {
+      background: @color-orange-bg-light !important;
+      border-right-color: @color-orange;
+      color: @color-orange !important;
+    }
+  }
+
   .ant-input {
     &:hover {
       border-color: @color-orange !important;
@@ -242,8 +269,7 @@ div.orange{
   }
 }
 
-span.purple,
-div.purple{
+span.purple {
   background-color: @color-purple;
 }
 
@@ -260,7 +286,7 @@ div.purple{
     color: @color-purple;
   }
 
-  button {
+  .btn-x {
     background-color: @color-purple;
     border-color: @color-purple;
 
@@ -298,6 +324,14 @@ div.purple{
 
     &:hover {
       background-color: #F9F0FF;
+    }
+  }
+
+  .menu-x {
+    .nuxt-link-exact-active {
+      background: @color-purple-bg-light !important;
+      border-right-color: @color-purple;
+      color: @color-purple !important;
     }
   }
 

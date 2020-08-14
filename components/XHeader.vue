@@ -2,8 +2,8 @@
   <div>
     <div class="header-line color-color-bg"></div>
     <div class="header">
+      <x-logo />
       <div class="left">
-        <logo />
         <div class="search-box">
           <a-input
             ref="userNameInput"
@@ -13,6 +13,36 @@
           >
             <i slot="suffix" class="icon">&#xe634;</i>
           </a-input>
+        </div>
+        <div class="header-menu">
+          <a-dropdown
+            class="btn-add"
+            :trigger="['click']"
+            :get-popup-container="(triggerNode) => triggerNode.parentNode"
+          >
+            <a-menu slot="overlay">
+              <a-menu-item key="1" class="menu-item">
+                <nuxt-link to="/project/new">
+                  <i class="icon">&#xe64a;</i>
+                  <span class="m-l-5">New project</span>
+                </nuxt-link>
+              </a-menu-item>
+              <a-menu-item key="2" class="menu-item">
+                <nuxt-link to="/repository/new">
+                  <i class="icon">&#xe656;</i>
+                  <span class="m-l-5">New repository</span>
+                </nuxt-link>
+              </a-menu-item>
+              <!--              <a-menu-divider />-->
+              <!--              <a-menu-item key="3" class="menu-item">-->
+              <!--                <i class="icon">&#xe65c;</i>-->
+              <!--                <span class="m-l-5">新建wiki</span>-->
+              <!--              </a-menu-item>-->
+            </a-menu>
+            <a-button class="btn-">
+              <i class="icon icon-18px">&#xe8d6;</i>
+            </a-button>
+          </a-dropdown>
         </div>
       </div>
       <div class="right">
@@ -28,26 +58,27 @@
                 class="m-r-5"
                 src="https://secure.gravatar.com/avatar/2572c114125cd3999426d5fd61f25ec6?s=80&d=identicon"
               />
-              Zhang, Robbie Kunxiang <i class="icon m-l-5 f12px">&#xe658;</i>
+              zhangkx
+              <i class="icon m-l-5 f12px">&#xe658;</i>
               <!--              <a-icon type="down"/>-->
             </a>
             <a-menu slot="overlay">
               <a-menu-item key="0" class="p-r-30 menu-item">
                 <i class="icon m-r-5">&#xe649;</i>
-                个人中心
+                Profile
               </a-menu-item>
               <a-menu-item key="1" class="menu-item">
                 <i class="icon m-r-5">&#xe6ae;</i>
-                个人设置
+                Settings
               </a-menu-item>
               <a-menu-divider />
               <a-menu-item key="2" class="menu-item">
                 <i class="icon m-r-5">&#xe6c2;</i>
-                退出
+                Sign out
               </a-menu-item>
               <a-menu-divider />
               <a-menu-item key="3" class="menu-item">
-                <a class="color-color" href="http://www.marssvn.com" target="_blank">
+                <a class="color-color" href="http://www.svnlike.com" target="_blank">
                   <i class="icon m-r-5">&#xebee;</i>
                   www.svnlike.com
                 </a>
@@ -55,7 +86,7 @@
             </a-menu>
           </a-dropdown>
         </div>
-        <div class="fl-l">
+        <div class="fl-l" style="display: none;">
           <a-dropdown
             :trigger="['click']"
             placement="bottomRight"
@@ -100,7 +131,7 @@
             </a-menu>
           </a-dropdown>
         </div>
-        <div class="fl-l">
+        <div class="fl-l" style="display: block;">
           <a-dropdown
             :trigger="['click']"
             placement="bottomRight"
@@ -111,32 +142,35 @@
             </a>
             <a-menu slot="overlay">
               <a-menu-item key="0" class="menu-item color-picker">
-                <span
-                  class="blue"
-                  :class="{ selected: $store.state.themeColor === 'blue' }"
-                  @click.stop="$store.commit('changeColor', 'blue')"
-                />
-                <span
-                  class="green"
-                  :class="{ selected: $store.state.themeColor === 'green' }"
-                  @click.stop="$store.commit('changeColor', 'green')"
-                />
-                <span
-                  class="orange"
-                  :class="{ selected: $store.state.themeColor === 'orange' }"
-                  @click.stop="$store.commit('changeColor', 'orange')"
-                />
-                <span
-                  class="purple"
-                  :class="{ selected: $store.state.themeColor === 'purple' }"
-                  @click.stop="$store.commit('changeColor', 'purple')"
-                />
+                <div>
+                  <span
+                    class="blue"
+                    :class="{ selected: $store.state.themeColor === 'blue' }"
+                    @click.stop="$store.commit('changeColor', 'blue')"
+                  />
+                  <span
+                    class="green"
+                    :class="{ selected: $store.state.themeColor === 'green' }"
+                    @click.stop="$store.commit('changeColor', 'green')"
+                  />
+                  <span
+                    class="orange"
+                    :class="{ selected: $store.state.themeColor === 'orange' }"
+                    @click.stop="$store.commit('changeColor', 'orange')"
+                  />
+                  <span
+                    class="purple"
+                    :class="{ selected: $store.state.themeColor === 'purple' }"
+                    @click.stop="$store.commit('changeColor', 'purple')"
+                  />
+                </div>
 
                 <div class="m-t-10">
                   <a-switch
-                    checked-children="深色"
-                    un-checked-children="浅色"
+                    checked-children="Dark"
+                    un-checked-children="Light"
                     :checked="$store.state.theme === 'dark'"
+                    class="btn-x"
                     @click="changeTheme"
                   />
                 </div>
@@ -188,33 +222,35 @@ export default {
   overflow: hidden;
   clear: both;
 
+  .logo {
+    float: left;
+    width: 150px;
+    text-align: center;
+    padding-top: 2px;
+  }
+
   .left {
     float: left;
-    height: 48px;
-    line-height: 48px;
-    clear: both;
-
-    .logo {
-      float: left;
-      height: 48px;
-      line-height: 48px;
-      margin-left: 20px;
-      padding-top: 2px;
-    }
 
     .search-box {
       float: left;
-      height: 48px;
-      line-height: 48px;
       width: 320px;
-      margin-left: 20px;
+    }
+
+    .header-menu {
+      float: left;
+      margin-left: 10px;
+
+      .btn-add {
+        position: relative;
+        top: -1px;
+        padding: 2px 8px 0;
+      }
     }
   }
 
   .right {
     float: right;
-    height: 48px;
-    line-height: 48px;
     overflow: hidden;
     padding-right: 15px;
 
@@ -240,11 +276,14 @@ export default {
 
       &.color-picker {
         cursor: auto;
+        transition: none !important;
+        -webkit-backface-visibility: hidden;
+        -webkit-transform-style: preserve-3d;
 
         span {
           display: inline-block;
-          width: 28px !important;
-          height: 28px !important;
+          width: 28px;
+          height: 28px;
           margin: 3px;
           cursor: pointer;
 

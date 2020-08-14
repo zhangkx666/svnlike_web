@@ -1,12 +1,18 @@
 export const state = () => ({
   // current theme
-  theme: 'light',
+  theme: localStorage.getItem('theme') || 'light',
 
   // current color
-  themeColor: 'orange',
+  themeColor: localStorage.getItem('theme-color') || 'orange',
 
   // language
-  lang: 'en',
+  lang: localStorage.getItem('lang') || 'en',
+
+  // flash message
+  flash: null,
+
+  // show flash
+  showFlash: false,
 })
 
 export const mutations = {
@@ -21,5 +27,15 @@ export const mutations = {
   changeLang(state, lang) {
     state.lang = lang
     localStorage.setItem('lang', lang)
+  },
+
+  // flash message
+  flashMessage(state, flash) {
+    state.flash = flash
+  },
+
+  // show flash
+  showFlash(state, showFlash) {
+    state.showFlash = showFlash
   },
 }

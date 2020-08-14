@@ -9,6 +9,13 @@ export default {
    ** See https://nuxtjs.org/api/configuration-target
    */
   target: 'server',
+
+  /**
+   * Environment variable
+   */
+  env: {
+    API_URL: 'http://localhost:8888',
+  },
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -43,7 +50,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['@/plugins/antd-ui'],
+  plugins: ['@/plugins/antd-ui', '@/plugins/axios', '@/plugins/route'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -62,12 +69,24 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    proxy: true,
+    prefix: '/api/v1',
+    credentials: true,
+  },
+  proxy: {
+    '/api/v1': {
+      target: 'http://localhost:8090',
+      changeOrigin: true,
+      pathRewrite: { '^/api/v1': '' },
+    },
+  },
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
@@ -93,4 +112,8 @@ export default {
       ],
     },
   },
+  /**
+   * loading
+   */
+  loading: false,
 }
