@@ -1,70 +1,91 @@
 <template>
-  <div class="main">
-    <a-row>
-      <a-col :lg="6" :offset="1" class="m-b-30">
+  <div>
+    <el-row :gutter="50">
+      <el-col :lg="7" class="m-b-20">
         <h2>Create a new project</h2>
         <p>
-          Projects allow you to manage and collaborate across multiple repositories. Members of a project have access to
+          <nuxt-link to="/project">
+            Projects
+          </nuxt-link>
+          allow you to manage and collaborate across multiple repositories. Members of a project have access to all of
           all of its repositories.
         </p>
         <p>
           Repositories that belong to a project are prefixed with the project namespace.
         </p>
-      </a-col>
-      <a-col :lg="15" :offset="1">
+      </el-col>
+      <el-col :lg="17">
         <form @submit.prevent="submitProject">
-          <a-row>
-            <a-col :lg="24">
+          <el-row>
+            <el-col :lg="24">
               <div class="m-t-5 m-b-10"><label class="label">Project name</label></div>
-            </a-col>
-            <a-col :lg="14">
-              <a-input v-model.trim="project.name" placeholder="Project Name" @blur="checkName" @change="typeUrlName" />
-            </a-col>
-            <a-col :lg="24">
+            </el-col>
+            <el-col :lg="14">
+              <el-input
+                v-model.trim="project.name"
+                placeholder="Project Name"
+                autofocus
+                @blur="checkName"
+                @input="typeUrlName"
+              />
+              <!-- <a-input v-model.trim="project.name" placeholder="Project Name" @blur="checkName" @change="typeUrlName" />-->
+            </el-col>
+            <el-col :lg="24">
               <div v-if="projectNameIsNotAvailable" class="color-danger field-error">
                 Please fill in a descriptive name for your project.
               </div>
-            </a-col>
-          </a-row>
+            </el-col>
+          </el-row>
 
-          <a-row>
-            <a-col :lg="24">
-              <div class="m-t-30 m-b-10"><label class="label">Project URL</label></div>
-            </a-col>
-            <a-col :lg="14">
-              <a-input
-                v-model.trim="project.urlName"
-                addon-before="http://svn.svnlike.com/"
-                placeholder="project_url"
-                @blur="checkUrl"
-              />
-            </a-col>
-            <a-col :lg="24">
+          <el-row>
+            <el-col :lg="24">
+              <div class="m-t-20 m-b-10"><label class="label">Project URL</label></div>
+            </el-col>
+            <el-col :lg="14">
+              <el-input v-model="project.urlName" placeholder="project_url" @blur="checkUrl">
+                <template slot="prepend">http://svn.svnlike.com/</template>
+              </el-input>
+              <!--              <a-input-->
+              <!--                v-model.trim="project.urlName"-->
+              <!--                addon-before="http://svn.svnlike.com/"-->
+              <!--                placeholder="project_url"-->
+              <!--                @blur="checkUrl"-->
+              <!--              />-->
+            </el-col>
+            <el-col :lg="24">
               <div v-if="projectUrlIsNotAvailable" class="color-danger field-error">
                 Please choose a project URL with no special characters.
               </div>
-            </a-col>
-          </a-row>
+            </el-col>
+          </el-row>
 
-          <a-row>
-            <a-col :lg="24">
-              <div class="m-t-30 m-b-10">
+          <el-row>
+            <el-col :lg="24">
+              <div class="m-t-20 m-b-10">
                 <label class="label"> Project description <span class="optional">(optional)</span> </label>
               </div>
-            </a-col>
-            <a-col :lg="22">
-              <a-textarea v-model.trim="project.description" :rows="8" allow-clear placeholder="Project Description" />
-            </a-col>
-          </a-row>
+            </el-col>
+            <el-col :lg="22">
+              <el-input v-model="project.description" type="textarea" :rows="8" placeholder="Project Description">
+              </el-input>
+              <!--              <a-textarea v-model.trim="project.description" :rows="8" allow-clear placeholder="Project Description" />-->
+            </el-col>
+          </el-row>
 
           <div class="m-t-40">
-            <a-button type="primary" html-type="submit" :loading="isLoading" :disabled="checkButtonDisabled">
+            <el-button
+              class="x-btn"
+              native-type="submit"
+              type="primary"
+              :loading="isLoading"
+              :disabled="checkButtonDisabled"
+            >
               Create project
-            </a-button>
+            </el-button>
           </div>
         </form>
-      </a-col>
-    </a-row>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -101,6 +122,7 @@ export default {
         /^[a-z0-9]+$/.test(this.project.name)
       ) {
         this.project.urlName = this.project.name
+        this.checkUrl()
       }
     },
     submitProject() {
@@ -120,30 +142,25 @@ export default {
 </script>
 
 <style scoped lang="less">
-.main {
-  margin-top: 30px;
-  margin-right: 4.17%;
+h2 {
+  font-size: 22px;
+}
 
-  h2 {
-    font-size: 22px;
-  }
+p {
+  color: #303030;
+}
 
-  p {
-    color: #303030;
-  }
+.label {
+  font-weight: bold;
+}
 
-  .label {
-    font-weight: bold;
-  }
+.field-error {
+  margin-top: 2px;
+}
 
-  .field-error {
-    margin-top: 2px;
-  }
-
-  .optional {
-    //font-size: 12px;
-    color: #717171;
-    font-weight: normal;
-  }
+.optional {
+  //font-size: 12px;
+  color: #717171;
+  font-weight: normal;
 }
 </style>

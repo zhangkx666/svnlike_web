@@ -1,5 +1,87 @@
 @import "color";
 
-.ant-input {
+.ant-input, .ant-input-group-addon {
   color: @color-input !important;
+}
+
+
+// element-ui
+.el-input-group__prepend {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+.el-input__inner {
+  height: 35px !important;
+}
+.el-input__inner, .el-textarea__inner {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+.el-textarea__inner {
+  padding-top: 10px !important;
+}
+.el-input__suffix {
+  right: 12px !important;
+}
+.el-input--suffix .el-input__inner {
+  padding-right: 35px !important;
+}
+.el-button--small {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+.el-dropdown-link{
+  cursor: pointer;
+}
+
+.el-popper[x-placement^=bottom] {
+  margin-top: -2px !important;
+}
+
+.el-dropdown-menu {
+  padding: 5px 0 !important;
+}
+
+.el-dropdown-menu__item {
+  line-height: 30px !important;
+}
+
+.popper__arrow {
+  //display: none !important;
+}
+.el-image {
+  text-align: center !important;
+}
+
+.el-loading-mask {
+  background-color: rgba(255, 255, 255, 0) !important;
+}
+
+// and design
+.ant-btn {
+  border: 1px solid #DCDFE6 !important;
+}
+
+// svnlike
+.page-header {
+  border-bottom: 1px solid #DCDFE6;
+  margin-bottom: 20px;
+  h1 {
+    font-size: 24px;
+    color: #333333;
+  }
+}
+.page-content {
+  min-height: 600px;
+}
+.block {
+  display: block;
+}
+
+.no-avatar {
+  font-size: 60px;
+  font-weight: bold;
+  color: @color-blue;
+  position: relative;
+  top: -10px;
 }

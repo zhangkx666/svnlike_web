@@ -5,7 +5,7 @@
     <!--    <x-breadcrumb />-->
 
     <transition name="layout">
-      <div class="container">
+      <div class="main-body">
         <x-flash :flash="$store.state.flash" />
         <Nuxt class="content" />
       </div>
@@ -22,9 +22,10 @@ export default {
 }
 </script>
 <style scoped lang="less">
-.container {
+.main-body {
   max-width: 1280px;
-  margin: 15px auto 0;
+  margin: 0 auto;
+  padding: 20px 4%;
   //height: 600px;
   //background: #f5f5f5;
 }

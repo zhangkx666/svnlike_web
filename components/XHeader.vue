@@ -5,14 +5,12 @@
       <x-logo />
       <div class="left">
         <div class="search-box">
-          <a-input
-            ref="userNameInput"
-            v-model="searchText"
-            class="dark-no-border"
-            placeholder="Project, Repository, Team, User"
-          >
+          <!--          <a-input v-model="searchText" class="dark-no-border" placeholder="Project, Repository, Team, User">-->
+          <!--            <i slot="suffix" class="icon">&#xe634;</i>-->
+          <!--          </a-input>-->
+          <el-input v-model="searchText" placeholder="Project, Repository, Team, User">
             <i slot="suffix" class="icon">&#xe634;</i>
-          </a-input>
+          </el-input>
         </div>
         <div class="header-menu">
           <a-dropdown
@@ -39,7 +37,7 @@
               <!--                <span class="m-l-5">新建wiki</span>-->
               <!--              </a-menu-item>-->
             </a-menu>
-            <a-button class="btn-">
+            <a-button>
               <i class="icon icon-18px">&#xe8d6;</i>
             </a-button>
           </a-dropdown>
@@ -170,7 +168,6 @@
                     checked-children="Dark"
                     un-checked-children="Light"
                     :checked="$store.state.theme === 'dark'"
-                    class="btn-x"
                     @click="changeTheme"
                   />
                 </div>
@@ -210,7 +207,11 @@ export default {
   },
 }
 </script>
-
+<style lang="less">
+.el-input__inner {
+  height: 32px !important;
+}
+</style>
 <style scoped lang="less">
 .header-line {
   height: 4px;

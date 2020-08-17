@@ -50,7 +50,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['@/plugins/antd-ui', '@/plugins/axios', '@/plugins/route'],
+  plugins: ['@/plugins/antd-ui', '@/plugins/element-ui', '@/plugins/axios', '@/plugins/route'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -107,6 +107,13 @@ export default {
             libraryName: 'ant-design-vue',
             libraryDirectory: 'es',
             style: true, // `style: true` 会加载 less 文件
+          },
+        ],
+        [
+          'component',
+          {
+            libraryName: 'element-ui',
+            styleLibraryName: 'theme-chalk',
           },
         ],
       ],

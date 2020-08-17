@@ -75,8 +75,8 @@ export default {
   }
 
   &.alert-error {
-    color: #a94442;
-    background-color: #f2dede;
+    color: #c42d2a;
+    background-color: #ffe3e3;
     border-color: #ebccd1;
   }
 
