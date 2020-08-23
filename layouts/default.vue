@@ -1,13 +1,13 @@
 <template>
   <div :class="[$store.state.theme, $store.state.themeColor]">
-    <x-header />
+    <x-header class="header" />
     <!--    <x-menu />-->
     <!--    <x-breadcrumb />-->
 
     <transition name="layout">
-      <div class="main-body">
-        <x-flash :flash="$store.state.flash" />
-        <Nuxt class="content" />
+      <div class="main">
+        <x-flash :flash="$store.state.flash" :duration="1000" />
+        <Nuxt />
       </div>
     </transition>
   </div>
@@ -22,11 +22,11 @@ export default {
 }
 </script>
 <style scoped lang="less">
-.main-body {
+.main {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 20px 4%;
-  //height: 600px;
+  padding: 20px;
+  //min-height: 600px;
   //background: #f5f5f5;
 }
 </style>

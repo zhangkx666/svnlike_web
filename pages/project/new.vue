@@ -4,7 +4,7 @@
       <el-col :lg="7" class="m-b-20">
         <h2>Create a new project</h2>
         <p>
-          <nuxt-link to="/project">
+          <nuxt-link to="/project" class="color-color">
             Projects
           </nuxt-link>
           allow you to manage and collaborate across multiple repositories. Members of a project have access to all of
@@ -39,18 +39,12 @@
 
           <el-row>
             <el-col :lg="24">
-              <div class="m-t-20 m-b-10"><label class="label">Project URL</label></div>
+              <div class="m-b-10" style="margin-top: 22px;"><label class="label">Project URL</label></div>
             </el-col>
             <el-col :lg="14">
               <el-input v-model="project.urlName" placeholder="project_url" @blur="checkUrl">
                 <template slot="prepend">http://svn.svnlike.com/</template>
               </el-input>
-              <!--              <a-input-->
-              <!--                v-model.trim="project.urlName"-->
-              <!--                addon-before="http://svn.svnlike.com/"-->
-              <!--                placeholder="project_url"-->
-              <!--                @blur="checkUrl"-->
-              <!--              />-->
             </el-col>
             <el-col :lg="24">
               <div v-if="projectUrlIsNotAvailable" class="color-danger field-error">
@@ -132,6 +126,14 @@ export default {
           name: this.project.name,
           urlName: this.project.urlName,
           description: this.project.description.replace(/[\r\n]/g, '\\n'),
+        })
+        .then((res) => {
+          this.$message.success(res.message)
+          this.$router.push({ name: 'project-urlName', params: { urlName: this.project.urlName } })
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$flash.error(error.message)
         })
         .finally(() => {
           this.isLoading = false

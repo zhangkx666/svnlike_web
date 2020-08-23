@@ -13,50 +13,35 @@
       </div>
       <div class="clear"></div>
     </div>
-    <div v-loading="loading" class="page-content">
-      <el-row :gutter="20">
-        <template v-for="idx in 2">
-          <a-skeleton :key="idx" :loading="loading" class="m-b-30" active avatar />
-        </template>
-        <el-col v-for="project in projects" :key="project.name" :lg="24">
-          <div class="card">
-            <div class="avatar">
-              <nuxt-link :to="'/project/' + project.urlName" class="color-color">
-                <el-image :src="project.avatar || ''" fit="fill">
-                  <div slot="error" class="no-avatar color-color">
-                    {{ project.name.substr(0, 1).toUpperCase() }}
-                  </div>
-                </el-image>
-              </nuxt-link>
-            </div>
-            <div class="content">
-              <h2>
-                <nuxt-link :to="'/project/' + project.urlName" class="color-color">
-                  {{ project.name }}
-                </nuxt-link>
-              </h2>
-              <div class="desc">
-                {{ project.description }}
-              </div>
-            </div>
-            <el-dropdown class="more" trigger="click">
-              <span class="el-dropdown-link">
-                <i class="icon" style="font-size: 18px;">&#xe672;</i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>
-                  <nuxt-link :to="'/project/' + project.url + '/edit'" class="block">
-                    Edit
-                  </nuxt-link>
-                </el-dropdown-item>
-                <el-dropdown-item>
-                  <nuxt-link :to="'/project/' + project.url + '/members'" class="block">
-                    Members
-                  </nuxt-link>
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+    <div class="page-content">
+      <el-row class="m-t-20 m-b-10">
+        <el-col :md="8">
+          <div class="search-project">
+            <el-input v-model="searchText" placeholder="Project" @keyup.enter.native="getProjectList">
+              <i slot="suffix" class="icon icon-search">&#xe634;</i>
+            </el-input>
           </div>
+        </el-col>
+        <el-col :md="16">
+          <div class="view">
+            <i class="icon" :class="{ 'color-color': viewType === 24 }" @click="changeViewType(24)">&#xe663;</i>
+            <i class="icon" :class="{ 'color-color': viewType === 12 }" @click="changeViewType(12)">&#xe7b7;</i>
+          </div>
+        </el-col>
+      </el-row>
+      <el-row v-loading="loading" :gutter="20" class="projects">
+        <div v-if="showSkeleton">
+          <el-col v-for="idx in 4" :key="idx" :lg="viewType">
+            <template>
+              <a-skeleton :loading="showSkeleton" active :avatar="{ size: 74, shape: 'square' }" class="m-2-30" />
+            </template>
+          </el-col>
+        </div>
+        <el-col v-for="project in likedProjects" :key="project.urlName" :lg="viewType" class="m-b-20">
+          <project-card :project="project" :liked="true" @refreshLiked="refreshLiked" />
+        </el-col>
+        <el-col v-for="project in unlikedProjects" :key="project.urlName" :lg="viewType" class="m-b-20">
+          <project-card :project="project" :liked="false" @refreshLiked="refreshLiked" />
         </el-col>
       </el-row>
     </div>
@@ -68,53 +53,95 @@ export default {
   data() {
     return {
       loading: true,
+      showSkeleton: true,
       projects: [],
+      likedProjectIds: [],
+      viewType: 12,
+      searchText: '',
     }
   },
+  computed: {
+    likedProjects() {
+      const _this = this
+      return this.projects.filter(function (project) {
+        return _this.likedProjectIds.includes(project.id)
+      })
+    },
+    unlikedProjects() {
+      const _this = this
+      return this.projects.filter(function (project) {
+        return !_this.likedProjectIds.includes(project.id)
+      })
+    },
+  },
   created() {
+    this.viewType = parseInt(localStorage.getItem('svnlike-project-view-type')) || 12
+    this.getLikedProjectIds()
+    this.getProjectList()
+  },
+  methods: {
+    changeViewType(viewType) {
+      this.viewType = viewType
+      localStorage.setItem('svnlike-project-view-type', viewType)
+    },
     // get repository list
-    this.$axios.get('project').then((res) => {
-      this.projects = res.data
-      this.loading = false
-    })
+    getProjectList() {
+      this.loading = true
+      this.$axios
+        .$get('project', {
+          params: {
+            keyword: this.searchText.trim(),
+            pageSize: 1000,
+            page: 1,
+          },
+        })
+        .then((data) => {
+          this.projects = data
+          this.loading = false
+          this.showSkeleton = false
+        })
+    },
+    // get liked project ids
+    getLikedProjectIds() {
+      this.$axios.$get('project/likedIds').then((data) => {
+        this.likedProjectIds = data
+      })
+    },
+    // refresh liked
+    refreshLiked(args) {
+      if (args.isLike) {
+        this.likedProjectIds.push(args.pid)
+      } else {
+        this.likedProjectIds.splice(this.likedProjectIds.indexOf(args.pid), 1)
+      }
+    },
   },
 }
 </script>
 
 <style scoped lang="less">
-.card {
-  background: #f8f8f8;
-  padding: 12px;
-  margin-bottom: 30px;
-  position: relative;
-  height: 106px;
-
-  &:hover {
-    background: #f5f5f5;
-    //box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+.search-project {
+  .icon-search {
+    position: relative;
+    top: 5px;
   }
+}
 
-  .avatar {
-    position: fixed;
-    width: 80px;
-    height: 80px;
-    border: 3px solid #fff;
-    text-align: center;
+.view {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  text-align: right;
+
+  i {
+    font-size: 18px;
+    margin-left: 3px;
+    cursor: pointer;
   }
+}
 
-  .content {
-    h2 {
-      margin-top: -2px;
-    }
-
-    margin-left: 100px;
-    margin-right: 20px;
-  }
-
-  .more {
-    position: absolute;
-    top: 2px;
-    right: 12px;
+.page-content {
+  .projects {
+    min-height: 520px;
   }
 }
 </style>

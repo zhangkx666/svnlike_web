@@ -1,22 +1,24 @@
 export default function ({ $axios, store }) {
   $axios.onError((error) => {
+    // const response = error.response
+    // if (response) {
+    //   const message = response.data.message
+    //
+    //   switch (message.displayType) {
+    //     case 'message':
+    //       window.$nuxt.$message.error(message.message)
+    //       break
+    //     case 'flash':
+    //       window.$nuxt.$flash.error(message.message || response.status + ' ' + response.statusText)
+    //   }
+    // }
     const response = error.response
-    if (response) {
-      const data = response.data
-
-      // show alert:error
-      // store.commit('showFlash', true)
-      store.commit('flashMessage', {
-        type: data.type || 'error',
-        code: data.code,
-        message: data.message || response.status + ' ' + response.statusText,
-      })
-
-      // setTimeout(function () {
-      //   store.commit('flashMessage', null)
-      // }, 10000)
-      // window.$nuxt.$message.error(data.message, 5)
+    const data = {
+      status: response.status,
+      statusText: response.statusText,
+      errorCode: response.data.code,
+      message: response.data.message || response.status + ' ' + response.statusText,
     }
-    return Promise.resolve(error)
+    return Promise.reject(data)
   })
 }

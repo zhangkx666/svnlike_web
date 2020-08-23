@@ -42,437 +42,149 @@
   //}
 }
 
-// color: blue, green, orange, purple
-span.blue {
-  background-color: @color-blue;
+@themeList: blue, green, orange, purple;
+@colorList: @color-blue, @color-green, @color-orange, @color-purple;
+@colorHoverList: @color-blue-hover, @color-green-hover, @color-orange-hover, @color-purple-hover;
+@colorBgLightList: @color-blue-bg-light, @color-green-bg-light, @color-orange-bg-light, @color-purple-bg-light;
+// add after
+//@bgColorHoverList: @color-blue-bg-light, @color-green-bg-light, @color-orange-bg-light, @color-purple-bg-light;
+@colorDisabledList: @color-blue-disabled, @color-green-disabled, @color-orange-disabled, @color-purple-disabled;
+@colorDisabledHoverList: @color-blue-disabled-hover, @color-green-disabled-hover, @color-orange-disabled-hover, @color-purple-disabled-hover;
+@colorDisabledLightList: @color-blue-disabled-light, @color-green-disabled-light, @color-orange-disabled-light, @color-purple-disabled-light;
+
+.theme(@i) when (@i <= length(@colorList)) {
+  .makeTheme(extract(@themeList, @i),
+    extract(@colorList, @i),
+    extract(@colorHoverList, @i),
+    extract(@colorBgLightList, @i),
+    extract(@colorDisabledList, @i),
+    extract(@colorDisabledHoverList, @i),
+    extract(@colorDisabledLightList, @i));
+  .theme(@i + 1);
 }
+.theme(1);
 
-.blue {
-  .color-color {
-    color: @color-blue;
+
+.makeTheme(@theme, @color, @colorHover, @bgColor,  @colorDisabled, @colorDisabledHover, @colorDisabledLight) {
+  span.@{theme} {
+    background-color: @color;
   }
 
-  .color-color-bg {
-    background-color: @color-blue;
-  }
-
-  .x-btn {
-    color: #fff;
-    border-color: @color-blue;
-    background-color: @color-blue;
-
-    &:hover {
-      //background-color: @color-blue-hover;
-      border-color: @color-blue-hover;
-      color: #fff;
-      background-color: @color-blue-hover;
+  .@{theme} {
+    .color-color {
+      color: @color !important;
     }
 
-    &:disabled {
+    .color-hover:hover {
+      color: @color !important;
+    }
+
+    .color-color-bg {
+      background-color: @color;
+    }
+
+    .x-btn {
       color: #fff;
-      background-color: #8ac7fc;
-      border-color: #8ac7fc;
+      border-color: @color;
+      background-color: @color;
 
       &:hover {
+        //background-color: @color-blue-hover;
+        border-color: @colorHover;
         color: #fff;
-        background-color: #9dd2ff;
-        border-color: #9dd2ff;
-      }
-    }
-
-    &.light {
-      color: @color-blue;
-      border-color: @color-blue;
-      background-color: @color-blue-bg-light;
-
-      &:hover {
-        border-color: @color-blue;
-        color: white;
-        background-color: @color-blue;
+        background-color: @colorHover;
       }
 
       &:disabled {
-        color: #c0c4cc;
-        background-color: #fff;
-        border-color: #ebeef5;
-      }
-    }
-  }
-
-  .ant-switch {
-    &.ant-switch-checked {
-      background-color: @color-blue;
-      border-color: @color-blue;
-
-      &:hover {
-        background-color: @color-blue-hover;
-        border-color: @color-blue-hover;
-      }
-    }
-  }
-
-  .menu-item {
-    &.active {
-      color: @color-blue-hover;
-      background-color: @color-blue-bg-light;
-    }
-
-    &:hover {
-      background-color: @color-blue-bg-light;
-    }
-  }
-
-  .x-menu {
-    .nuxt-link-exact-active {
-      background: @color-blue-bg-light !important;
-      border-right-color: @color-blue;
-      color: @color-blue !important;
-    }
-  }
-
-  .ant-input, .el-input__inner, .el-textarea__inner {
-    &:hover {
-      border-color: @color-blue !important;
-    }
-
-    &:focus {
-      border-color: @color-blue !important;
-      box-shadow: 0 0 0 2px rgba(@color-blue, 0.2);
-    }
-  }
-
-  .ant-btn {
-    &:hover, &:focus {
-      border-color: @color-blue !important;
-      color: @color-blue !important;
-    }
-  }
-}
-
-
-span.green {
-  background-color: @color-green;
-}
-
-.green {
-  .color-color {
-    color: @color-green;
-  }
-
-  .color-color-bg {
-    background-color: @color-green;
-  }
-
-  .x-btn {
-    color: #fff;
-    border-color: @color-green;
-    background-color: @color-green;
-
-    &:hover {
-      //background-color: @color-green-hover;
-      border-color: @color-green-hover;
-      color: #fff;
-      background-color: @color-green-hover;
-    }
-
-    &:disabled {
-      color: #fff;
-      background-color: #95cd73;
-      border-color: #95cd73;
-
-      &:hover {
         color: #fff;
-        background-color: #a1d085;
-        border-color: #a1d085;
+        background-color: @colorDisabled;
+        border-color: @colorDisabled;
+
+        &:hover {
+          color: #fff;
+          background-color: @colorDisabled;
+          border-color: @colorDisabled;
+        }
+      }
+
+      &.light {
+        color: @color;
+        border-color: @color;
+        background-color: @bgColor;
+
+        &:hover {
+          border-color: @color;
+          color: white;
+          background-color: @color;
+        }
+
+        &:disabled {
+          color: @colorDisabledLight;
+          background-color: #fff;
+          border-color: @colorDisabledLight;
+        }
       }
     }
 
-    &.light {
-      color: @color-green;
-      border-color: @color-green;
-      background-color: @color-green-bg-light;
+    .ant-switch {
+      &.ant-switch-checked {
+        background-color: @color;
+        border-color: @color;
+
+        &:hover {
+          background-color: @colorHover;
+          border-color: @colorHover;
+        }
+      }
+    }
+
+    .menu-item {
+      &.active {
+        color: @colorHover;
+        background-color: @bgColor;
+      }
 
       &:hover {
-        border-color: @color-green;
-        color: white;
-        background-color: @color-green;
-      }
-
-      &:disabled {
-        color: #c0c4cc;
-        background-color: #fff;
-        border-color: #ebeef5;
+        background-color: @bgColor;
       }
     }
-  }
 
-  .ant-switch {
-    &.ant-switch-checked {
-      background-color: @color-green;
-      border-color: @color-green;
+    .x-menu {
+      .nuxt-link-exact-active {
+        background: @bgColor !important;
+        border-right-color: @color;
+        color: @color !important;
+      }
+    }
 
+    .ant-input, .el-input__inner, .el-textarea__inner {
       &:hover {
-        background-color: @color-green-hover;
-        border-color: @color-green-hover;
+        border-color: @color !important;
       }
-    }
-  }
 
-  .menu-item {
-    &.active {
-      color: @color-green-hover;
-      background-color: @color-green-bg-light;
-    }
-
-    &:hover {
-      background-color: @color-green-bg-light;
-    }
-  }
-
-  .x-menu {
-    .nuxt-link-exact-active {
-      background: @color-green-bg-light !important;
-      border-right-color: @color-green;
-      color: @color-green !important;
-    }
-  }
-
-  .ant-input, .el-input__inner, .el-textarea__inner {
-    &:hover {
-      border-color: @color-green !important;
-    }
-
-    &:focus {
-      border-color: @color-green !important;
-      box-shadow: 0 0 0 2px rgba(@color-green, 0.2);
-    }
-  }
-
-  .ant-btn {
-    &:hover, &:focus {
-      border-color: @color-green !important;
-      color: @color-green !important;
-    }
-  }
-}
-
-
-span.orange {
-  background-color: @color-orange;
-}
-
-.orange {
-  .color-color {
-    color: @color-orange;
-  }
-
-  .color-color-bg {
-    background-color: @color-orange;
-  }
-
-  .x-btn {
-    color: #fff;
-    border-color: @color-orange;
-    background-color: @color-orange;
-
-    &:hover {
-      //background-color: @color-orange-hover;
-      border-color: @color-orange-hover;
-      color: #fff;
-      background-color: @color-orange-hover;
-    }
-
-    &:disabled {
-      color: #fff;
-      background-color: #ffc47a;
-      border-color: #ffc47a;
-
-      &:hover {
-        color: #fff;
-        background-color: #ffcf8d;
-        border-color: #ffcf8d;
+      &:focus {
+        border-color: @color !important;
+        box-shadow: 0 0 0 2px rgba(@color, 0.2);
       }
     }
 
-    &.light {
-      color: @color-orange;
-      border-color: @color-orange;
-      background-color: @color-orange-bg-light;
-
-      &:hover {
-        border-color: @color-orange;
-        color: white;
-        background-color: @color-orange;
-      }
-
-      &:disabled {
-        color: #c0c4cc;
-        background-color: #fff;
-        border-color: #ebeef5;
-      }
-    }
-  }
-
-  .ant-switch {
-    &.ant-switch-checked {
-      background-color: @color-orange;
-      border-color: @color-orange;
-
-      &:hover {
-        background-color: @color-orange-hover;
-        border-color: @color-orange-hover;
-      }
-    }
-  }
-
-  .menu-item {
-    &.active {
-      color: @color-orange-hover;
-      background-color: @color-orange-bg-light;
-    }
-
-    &:hover {
-      background-color: @color-orange-bg-light;
-    }
-  }
-
-  .x-menu {
-    .nuxt-link-exact-active {
-      background: @color-orange-bg-light !important;
-      border-right-color: @color-orange;
-      color: @color-orange !important;
-    }
-  }
-
-  .ant-input, .el-input__inner, .el-textarea__inner {
-    &:hover {
-      border-color: @color-orange !important;
-    }
-
-    &:focus {
-      border-color: @color-orange !important;
-      box-shadow: 0 0 0 2px rgba(@color-orange, 0.2);
-    }
-  }
-
-  .ant-btn {
-    &:hover, &:focus {
-      border-color: @color-orange !important;
-      color: @color-orange !important;
-    }
-  }
-}
-
-
-span.purple {
-  background-color: @color-purple;
-}
-
-.purple {
-  a {
-    color: @color-purple;
-
-    &:hover {
-      color: @color-purple;
-    }
-  }
-  .color-color {
-    color: @color-purple;
-  }
-
-  .color-color-bg {
-    background-color: @color-purple;
-  }
-
-  .x-btn {
-    color: #fff;
-    border-color: @color-purple;
-    background-color: @color-purple;
-
-    &:hover {
-      //background-color: @color-purple-hover;
-      border-color: @color-purple-hover;
-      color: #fff;
-      background-color: @color-purple-hover;
-    }
-
-    &:disabled {
-      color: #fff;
-      background-color: #dfa7ee;
-      border-color: #dfa7ee;
-
-      &:hover {
-        color: #fff;
-        background-color: #e3b4ef;
-        border-color: #e3b4ef;
+    .ant-btn {
+      &:hover, &:focus {
+        border-color: @color !important;
+        color: @color !important;
       }
     }
 
-    &.light {
-      color: @color-purple;
-      border-color: @color-purple;
-      background-color: @color-purple-bg-light;
-
-      &:hover {
-        border-color: @color-purple;
-        color: white;
-        background-color: @color-purple;
-      }
-
-      &:disabled {
-        color: #c0c4cc;
-        background-color: #fff;
-        border-color: #ebeef5;
-      }
-    }
-  }
-
-  .ant-switch {
-    &.ant-switch-checked {
-      background-color: @color-purple;
-      border-color: @color-purple;
-
-      &:hover {
-        background-color: @color-purple-hover;
-        border-color: @color-purple-hover;
-      }
-    }
-  }
-
-  .menu-item {
-    &.active {
-      color: @color-purple-hover;
-      background-color: @color-purple-bg-light;
+    .el-loading-spinner .path {
+      stroke: @color !important;
     }
 
-    &:hover {
-      background-color: @color-purple-bg-light;
-    }
-  }
-
-  .x-menu {
-    .nuxt-link-exact-active {
-      background: @color-purple-bg-light !important;
-      border-right-color: @color-purple;
-      color: @color-purple !important;
-    }
-  }
-
-  .ant-input, .el-input__inner, .el-textarea__inner {
-    &:hover {
-      border-color: @color-purple !important;
+    .el-tabs__item.is-active, .el-tabs__item:hover {
+      color: @color !important;
     }
 
-    &:focus {
-      border-color: @color-purple !important;
-      box-shadow: 0 0 0 2px rgba(@color-purple, 0.2);
-    }
-  }
-
-  .ant-btn {
-    &:hover, &:focus {
-      border-color: @color-purple !important;
-      color: @color-purple !important;
+    .el-tabs__active-bar {
+      background-color: @color;
     }
   }
 }

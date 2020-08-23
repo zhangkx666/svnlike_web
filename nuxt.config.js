@@ -50,7 +50,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['@/plugins/antd-ui', '@/plugins/element-ui', '@/plugins/axios', '@/plugins/route'],
+  plugins: ['@/plugins/flash', '@/plugins/antd-ui', '@/plugins/element-ui', '@/plugins/route', '@/plugins/axios'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components

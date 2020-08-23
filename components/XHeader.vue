@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header-line color-color-bg"></div>
-    <div class="header">
+    <div class="header-content">
       <x-logo />
       <div class="left">
         <div class="search-box">
@@ -217,7 +217,7 @@ export default {
   height: 4px;
 }
 
-.header {
+.header-content {
   height: 48px;
   line-height: 48px;
   overflow: hidden;

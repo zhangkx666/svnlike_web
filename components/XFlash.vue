@@ -1,10 +1,18 @@
 <template>
   <div v-if="flash !== null && isShow" class="alert" :class="'alert-' + flash.type">
-    <i v-if="displayIcon" class="icon icon-pre" v-html="iconText"></i>
-    <span>{{ flash.message }}</span>
-    <span class="btn-close" @click="isShow = false">
+    <div class="alert-icon">
+      <i v-if="displayIcon" class="icon icon-pre" v-html="iconText"></i>
+    </div>
+    <div class="alert-message">
+      <ul>
+        <li v-for="(item, idx) in messageList" :key="idx" :class="{ decimal: messageList.length > 1 }">
+          {{ item }}
+        </li>
+      </ul>
+    </div>
+    <div class="alert-close" @click="isShow = false">
       <i class="icon">&#xe65f;</i>
-    </span>
+    </div>
   </div>
 </template>
 
@@ -41,6 +49,9 @@ export default {
       }
       return icons[this.flash.type]
     },
+    messageList() {
+      return this.flash.message.split('\n')
+    },
   },
   watch: {
     flash(newVal, oldVal) {
@@ -58,7 +69,7 @@ export default {
 <style lang="less">
 .alert {
   font-size: 14px;
-  padding: 15px;
+  padding: 10px 15px 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
 
@@ -90,19 +101,34 @@ export default {
 <style scoped lang="less">
 .alert {
   position: relative;
-  line-height: 1.2;
-  padding-bottom: 12px;
+  line-height: 1.5;
+  padding-bottom: 0;
 }
 
-.icon-pre {
-  font-size: 20px;
-  margin-right: 5px;
+.alert-icon {
+  position: absolute;
+  left: 15px;
+  //top: 10px;
+
+  .icon-pre {
+    font-size: 20px;
+  }
 }
 
-.btn-close {
-  cursor: pointer;
+.alert-message {
+  margin-left: 50px;
+  margin-right: 30px;
+
+  li.decimal {
+    list-style: decimal;
+  }
+}
+
+.alert-close {
   position: absolute;
   right: 15px;
+  top: 10px;
+  cursor: pointer;
 
   .icon {
     font-size: 12px;

@@ -1,9 +1,14 @@
 @import "color";
 
+// ant-design
 .ant-input, .ant-input-group-addon {
   color: @color-input !important;
 }
 
+.ant-skeleton-avatar-square {
+  position: relative;
+  top: 10px;
+}
 
 // element-ui
 .el-input-group__prepend {
@@ -54,7 +59,7 @@
 }
 
 .el-loading-mask {
-  background-color: rgba(255, 255, 255, 0) !important;
+  background-color: rgba(255, 255, 255, 0.5) !important;
 }
 
 // and design
@@ -65,23 +70,26 @@
 // svnlike
 .page-header {
   border-bottom: 1px solid #DCDFE6;
-  margin-bottom: 20px;
   h1 {
     font-size: 24px;
     color: #333333;
   }
 }
 .page-content {
-  min-height: 600px;
 }
 .block {
   display: block;
 }
 
 .no-avatar {
-  font-size: 60px;
+  font-size: 56px;
   font-weight: bold;
   color: @color-blue;
   position: relative;
-  top: -10px;
+  top: -8px;
+
+  &.two {
+    zoom: 0.5;
+    top: 30px;
+  }
 }
