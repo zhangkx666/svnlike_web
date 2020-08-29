@@ -77,15 +77,15 @@
                 <textarea
                   id="desc"
                   v-model="project.description"
-                  rows="6"
+                  rows="4"
                   placeholder="Project description"
                   class="w-p100"
-                ></textarea>
+                />
               </div>
             </Cell>
           </Row>
 
-          <div class="m-t-20">
+          <div class="m-t-25">
             <label><b>Visibility</b></label>
           </div>
           <Row>
