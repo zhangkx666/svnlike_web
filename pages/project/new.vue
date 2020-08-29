@@ -1,85 +1,124 @@
 <template>
   <div>
-    <el-row :gutter="50">
-      <el-col :lg="7" class="m-b-20">
+    <Row :space-x="50">
+      <Cell :xl="7" :md="24" class="m-b-20">
         <h2>Create a new project</h2>
         <p>
           <nuxt-link to="/project" class="color-color">
             Projects
           </nuxt-link>
-          allow you to manage and collaborate across multiple repositories. Members of a project have access to all of
-          all of its repositories.
+          allow you to manage and collaborate across multiple repositories. You can manage code, document, or other
+          things in one project.
+        </p>
+        <p>
+          You can manage the relationship of repositories and members more easily by combining them in one project.
         </p>
         <p>
           Repositories that belong to a project are prefixed with the project namespace.
         </p>
-      </el-col>
-      <el-col :lg="17">
+      </Cell>
+
+      <Cell :xl="17" :md="24">
         <form @submit.prevent="submitProject">
-          <el-row>
-            <el-col :lg="24">
-              <div class="m-t-5 m-b-10"><label class="label">Project name</label></div>
-            </el-col>
-            <el-col :lg="14">
-              <el-input
-                v-model.trim="project.name"
-                placeholder="Project Name"
+          <div class="m-t-5 m-b-10">
+            <label for="name"><b>Project name</b></label>
+          </div>
+          <Row>
+            <Cell :xl="14" :md="14" :sm="18" :xs="24">
+              <input
+                id="name"
+                v-model="project.name"
+                type="text"
+                placeholder="Project name"
+                class="w-p100"
+                autocomplete="off"
                 autofocus
                 @blur="checkName"
                 @input="typeUrlName"
               />
-              <!-- <a-input v-model.trim="project.name" placeholder="Project Name" @blur="checkName" @change="typeUrlName" />-->
-            </el-col>
-            <el-col :lg="24">
-              <div v-if="projectNameIsNotAvailable" class="color-danger field-error">
-                Please fill in a descriptive name for your project.
-              </div>
-            </el-col>
-          </el-row>
+            </Cell>
+          </Row>
+          <div v-if="nameNotAvailable" class="field-error">
+            Please fill in a descriptive name for your project
+          </div>
 
-          <el-row>
-            <el-col :lg="24">
-              <div class="m-b-10" style="margin-top: 22px;"><label class="label">Project URL</label></div>
-            </el-col>
-            <el-col :lg="14">
-              <el-input v-model="project.urlName" placeholder="project_url" @blur="checkUrl">
-                <template slot="prepend">http://svn.svnlike.com/</template>
-              </el-input>
-            </el-col>
-            <el-col :lg="24">
-              <div v-if="projectUrlIsNotAvailable" class="color-danger field-error">
-                Please choose a project URL with no special characters.
+          <div class="m-t-20 m-b-10">
+            <label for="urlName"><b>Project URL</b></label>
+          </div>
+          <Row>
+            <Cell :xl="14" :md="14" :sm="18" :xs="24">
+              <div class="h-input-group">
+                <span class="h-input-addon">http://demo.svnlike.com/</span>
+                <input
+                  id="urlName"
+                  v-model="project.urlName"
+                  type="text"
+                  placeholder="project_url"
+                  autocomplete="off"
+                  class="w-p100"
+                  @blur="checkUrl"
+                />
               </div>
-            </el-col>
-          </el-row>
+            </Cell>
+          </Row>
+          <div v-if="urlNotAvailable" class="field-error">
+            Please fill in a project URL with no special characters
+          </div>
 
-          <el-row>
-            <el-col :lg="24">
-              <div class="m-t-20 m-b-10">
-                <label class="label"> Project description <span class="optional">(optional)</span> </label>
+          <div class="m-t-20 m-b-10">
+            <label for="desc">
+              <b>Project description</b>
+              <span class="optional">(optional)</span>
+            </label>
+          </div>
+          <Row>
+            <Cell :xl="22" :md="24">
+              <div class="relative">
+                <textarea
+                  id="desc"
+                  v-model="project.description"
+                  rows="6"
+                  placeholder="Project description"
+                  class="w-p100"
+                ></textarea>
               </div>
-            </el-col>
-            <el-col :lg="22">
-              <el-input v-model="project.description" type="textarea" :rows="8" placeholder="Project Description">
-              </el-input>
-              <!--              <a-textarea v-model.trim="project.description" :rows="8" allow-clear placeholder="Project Description" />-->
-            </el-col>
-          </el-row>
+            </Cell>
+          </Row>
+
+          <div class="m-t-20">
+            <label><b>Visibility</b></label>
+          </div>
+          <Row>
+            <Cell :xl="22" :md="24">
+              <div class="relative">
+                <div class="m-t-5">
+                  <Radio v-model="project.visibility" value="2">
+                    <span class="radio-title">Private</span> <br />
+                    <span class="radio-desc">
+                      Only Members can see this project
+                    </span>
+                  </Radio>
+                </div>
+                <div class="m-t-10">
+                  <Radio v-model="project.visibility" value="1">
+                    <span class="radio-title">Public</span> <br />
+                    <span class="radio-desc">
+                      Everyone on the internet can see this project
+                    </span>
+                  </Radio>
+                </div>
+              </div>
+            </Cell>
+          </Row>
 
           <div class="m-t-40">
-            <el-button
-              class="x-btn"
-              native-type="submit"
-              type="primary"
-              :loading="isLoading"
-              :disabled="checkButtonDisabled"
-            >
+            <h-button type="submit" size="l" class="x-btn" :loading="isLoading" :disabled="buttonDisabled">
               Create project
-            </el-button>
+            </h-button>
           </div>
         </form>
-      </el-col>
-    </el-row>
+      </Cell>
+    </Row>
   </div>
 </template>
 
@@ -92,23 +131,24 @@ export default {
         urlName: '',
         icon: '',
         description: '',
+        visibility: 2,
       },
       isLoading: false,
-      projectNameIsNotAvailable: false,
-      projectUrlIsNotAvailable: false,
+      nameNotAvailable: false,
+      urlNotAvailable: false,
     }
   },
   computed: {
-    checkButtonDisabled() {
+    buttonDisabled() {
       return this.project.name === '' || !/^[a-z0-9_]+$/.test(this.project.urlName)
     },
   },
   methods: {
     checkName() {
-      this.projectNameIsNotAvailable = this.project.name === ''
+      this.nameNotAvailable = this.project.name === ''
     },
     checkUrl() {
-      this.projectUrlIsNotAvailable = !/^[a-z0-9_]+$/.test(this.project.urlName)
+      this.urlNotAvailable = !/^[a-z0-9_]+$/.test(this.project.urlName)
     },
     typeUrlName() {
       if (
@@ -122,17 +162,15 @@ export default {
     submitProject() {
       this.isLoading = true
       this.$axios
-        .$post('project', {
-          name: this.project.name,
-          urlName: this.project.urlName,
-          description: this.project.description.replace(/[\r\n]/g, '\\n'),
-        })
+        .$post('project', this.project)
         .then((res) => {
           this.$message.success(res.message)
-          this.$router.push({ name: 'project-urlName', params: { urlName: this.project.urlName } })
+          this.$router.push({
+            name: 'project',
+            params: { project: this.project.urlName },
+          })
         })
         .catch((error) => {
-          console.log(error)
           this.$flash.error(error.message)
         })
         .finally(() => {
@@ -142,27 +180,3 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="less">
-h2 {
-  font-size: 22px;
-}
-
-p {
-  color: #303030;
-}
-
-.label {
-  font-weight: bold;
-}
-
-.field-error {
-  margin-top: 2px;
-}
-
-.optional {
-  //font-size: 12px;
-  color: #717171;
-  font-weight: normal;
-}
-</style>
