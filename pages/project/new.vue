@@ -123,6 +123,7 @@
 </template>
 
 <script>
+const urlPattern = /^[a-z0-9_-]+$/
 export default {
   data() {
     return {
@@ -140,7 +141,7 @@ export default {
   },
   computed: {
     buttonDisabled() {
-      return this.project.name === '' || !/^[a-z0-9_]+$/.test(this.project.urlName)
+      return this.project.name === '' || !urlPattern.test(this.project.urlName)
     },
   },
   methods: {
@@ -148,12 +149,12 @@ export default {
       this.nameNotAvailable = this.project.name === ''
     },
     checkUrl() {
-      this.urlNotAvailable = !/^[a-z0-9_]+$/.test(this.project.urlName)
+      this.urlNotAvailable = !urlPattern.test(this.project.urlName)
     },
     typeUrlName() {
       if (
         (this.project.urlName === '' || this.project.name.startsWith(this.project.urlName)) &&
-        /^[a-z0-9]+$/.test(this.project.name)
+        urlPattern.test(this.project.name)
       ) {
         this.project.urlName = this.project.name
         this.checkUrl()
