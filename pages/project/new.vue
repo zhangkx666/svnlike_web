@@ -27,6 +27,7 @@
             <Cell :xl="14" :md="14" :sm="18" :xs="24">
               <input
                 id="name"
+                ref="projectName"
                 v-model="project.name"
                 type="text"
                 placeholder="Project name"
@@ -92,7 +93,7 @@
             <Cell :xl="22" :md="24">
               <div class="relative">
                 <div class="m-t-5">
-                  <Radio v-model="project.visibility" value="2">
+                  <Radio v-model="project.visibility" :value="2">
                     <span class="radio-title">Private</span> <br />
                     <span class="radio-desc">
                       Only Members can see this project
@@ -100,7 +101,7 @@
                   </Radio>
                 </div>
                 <div class="m-t-10">
-                  <Radio v-model="project.visibility" value="1">
+                  <Radio v-model="project.visibility" :value="1">
                     <span class="radio-title">Public</span> <br />
                     <span class="radio-desc">
                       Everyone on the internet can see this project
@@ -143,6 +144,14 @@ export default {
     buttonDisabled() {
       return this.project.name === '' || !urlPattern.test(this.project.urlName)
     },
+  },
+  created() {
+    // set name focus
+    this.$nextTick(() => {
+      if (this.$refs.projectName) {
+        this.$refs.projectName.focus()
+      }
+    })
   },
   methods: {
     checkName() {
