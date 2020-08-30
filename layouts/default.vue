@@ -6,7 +6,6 @@
 
     <transition name="layout">
       <div class="main">
-        <x-flash :flash="$store.state.flash" :duration="1000" />
         <Nuxt />
       </div>
     </transition>
@@ -28,5 +27,6 @@ export default {
   padding: 20px;
   //min-height: 600px;
   //background: #f5f5f5;
+  overflow: hidden;
 }
 </style>

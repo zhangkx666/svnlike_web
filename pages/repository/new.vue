@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-flash :flash="flash" />
+    <x-flash />
     <Row :space-x="50">
       <Cell :xl="7" :md="24" class="m-b-20">
         <h2>Create a new repository</h2>
@@ -160,7 +160,6 @@ const urlPattern = /^[a-z0-9_-]+$/
 export default {
   data() {
     return {
-      flash: null,
       projects: [],
       project: {},
       repo: {
@@ -180,7 +179,7 @@ export default {
   },
   computed: {
     buttonDisabled() {
-      return this.repo.name === '' || !urlPattern.test(this.repo.urlName)
+      return !this.repo.name || !this.repo.projectId || !urlPattern.test(this.repo.urlName)
     },
   },
   created() {
@@ -251,7 +250,7 @@ export default {
           })
         })
         .catch((error) => {
-          this.flash = this.$flash.error(error.message)
+          this.$flash.error(error.message)
         })
         .finally(() => {
           this.isLoading = false

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-flash :flash="flash" />
+    <x-flash />
     <Row :space-x="50">
       <Cell :xl="7" :md="24" class="m-b-20">
         <h2>Create a new project</h2>
@@ -129,7 +129,6 @@ const urlPattern = /^[a-z0-9_-]+$/
 export default {
   data() {
     return {
-      flash: null,
       project: {
         name: '',
         urlName: '',
@@ -183,7 +182,7 @@ export default {
           })
         })
         .catch((error) => {
-          this.flash = this.$flash.error(error.message)
+          this.$flash.error(error.message)
         })
         .finally(() => {
           this.isLoading = false

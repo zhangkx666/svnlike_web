@@ -1,7 +1,7 @@
 <template>
-  <div v-if="flash !== null" class="alert" :class="'alert-' + flash.type">
+  <div v-if="flash.message" class="alert" :class="'alert-' + flash.type">
     <div v-if="displayIcon" class="alert-icon">
-      <i class="icon-pre" :class="iconClass"></i>
+      <i class="icon-pre" :class="'h-icon-' + flash.type"></i>
     </div>
     <div class="alert-message">
       <ul>
@@ -10,7 +10,7 @@
         </li>
       </ul>
     </div>
-    <div v-if="closable" class="alert-close" @click="flash = null">
+    <div v-if="closable" class="alert-close" @click="hideFlash">
       <i class="h-icon-close"></i>
     </div>
   </div>
@@ -20,10 +20,6 @@
 export default {
   name: 'XFlash',
   props: {
-    flash: {
-      type: Object,
-      default: null,
-    },
     displayIcon: {
       type: Boolean,
       default: true,
@@ -34,7 +30,7 @@ export default {
     },
     duration: {
       type: Number,
-      default: 10, // 10s
+      default: 10, // default 10s
     },
   },
   data() {
@@ -43,28 +39,35 @@ export default {
     }
   },
   computed: {
-    iconClass() {
-      const icons = {
-        error: 'h-icon-error',
-        warning: 'h-icon-warn',
-        info: 'h-icon-info',
-        success: 'h-icon-success',
-      }
-      return icons[this.flash.type]
+    flash() {
+      return this.$store.state.flash
     },
     messageList() {
-      return this.flash.message.split('\n')
+      if (this.flash.message) {
+        return this.flash.message.split('\n')
+      } else {
+        return null
+      }
+    },
+    flashUpdated() {
+      return this.$store.state.flash.timestamp
     },
   },
   watch: {
-    flash(newVal, oldVal) {
+    flashUpdated(newVal, oldVal) {
       if (this.duration > 0) {
         clearTimeout(this.timeOutId)
         const _this = this
         this.timeOutId = setTimeout(function () {
-          _this.flash = null
+          _this.$flash.clear()
         }, this.duration * 1000)
       }
+    },
+  },
+  methods: {
+    hideFlash() {
+      clearTimeout(this.timeOutId)
+      this.$flash.clear()
     },
   },
 }
@@ -120,7 +123,7 @@ export default {
 }
 
 .alert-message {
-  margin-left: 40px;
+  margin-left: 50px;
   margin-right: 30px;
 
   li.decimal {

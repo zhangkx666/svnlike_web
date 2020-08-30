@@ -3,15 +3,22 @@ import Vue from 'vue'
 
 Vue.prototype.$flash = {
   error(message) {
-    return { type: 'error', message }
+    showFlash('error', message)
   },
   success(message) {
-    return { type: 'success', message }
+    showFlash('success', message)
   },
   warning(message) {
-    return { type: 'warning', message }
+    showFlash('warning', message)
   },
   info(message) {
-    return { type: 'info', message }
+    showFlash('info', message)
   },
+  clear() {
+    window.$nuxt.$store.commit('flash/clear')
+  },
+}
+
+function showFlash(type, message) {
+  window.$nuxt.$store.commit('flash/show', { type, message })
 }
