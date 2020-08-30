@@ -1,17 +1,17 @@
 <template>
-  <div v-if="flash !== null && isShow" class="alert" :class="'alert-' + flash.type">
-    <div class="alert-icon">
-      <i v-if="displayIcon" class="icon icon-pre" v-html="iconText"></i>
+  <div v-if="flash !== null" class="alert" :class="'alert-' + flash.type">
+    <div v-if="displayIcon" class="alert-icon">
+      <i class="icon-pre" :class="iconClass"></i>
     </div>
     <div class="alert-message">
       <ul>
-        <li v-for="(item, idx) in messageList" :key="idx" :class="{ decimal: messageList.length > 1 }">
-          {{ item }}
+        <li v-for="(message, idx) in messageList" :key="idx" :class="{ decimal: messageList.length > 1 }">
+          {{ message }}
         </li>
       </ul>
     </div>
-    <div class="alert-close" @click="isShow = false">
-      <i class="icon">&#xe65f;</i>
+    <div v-if="closable" class="alert-close" @click="flash = null">
+      <i class="h-icon-close"></i>
     </div>
   </div>
 </template>
@@ -28,6 +28,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    closable: {
+      type: Boolean,
+      default: true,
+    },
     duration: {
       type: Number,
       default: 10, // 10s
@@ -35,17 +39,16 @@ export default {
   },
   data() {
     return {
-      isShow: true,
       timeOutId: 0,
     }
   },
   computed: {
-    iconText() {
+    iconClass() {
       const icons = {
-        error: '&#xe6b4;',
-        warning: '&#xe65d;',
-        info: '&#xe65e;',
-        success: '&#xe65f;',
+        error: 'h-icon-error',
+        warning: 'h-icon-warn',
+        info: 'h-icon-info',
+        success: 'h-icon-success',
       }
       return icons[this.flash.type]
     },
@@ -55,12 +58,13 @@ export default {
   },
   watch: {
     flash(newVal, oldVal) {
-      this.isShow = true
-      clearTimeout(this.timeOutId)
-      const _this = this
-      this.timeOutId = setTimeout(function () {
-        _this.isShow = false
-      }, this.duration * 1000)
+      if (this.duration > 0) {
+        clearTimeout(this.timeOutId)
+        const _this = this
+        this.timeOutId = setTimeout(function () {
+          _this.flash = null
+        }, this.duration * 1000)
+      }
     },
   },
 }
@@ -108,7 +112,7 @@ export default {
 .alert-icon {
   position: absolute;
   left: 15px;
-  //top: 10px;
+  top: 12px;
 
   .icon-pre {
     font-size: 20px;
@@ -116,7 +120,7 @@ export default {
 }
 
 .alert-message {
-  margin-left: 50px;
+  margin-left: 40px;
   margin-right: 30px;
 
   li.decimal {

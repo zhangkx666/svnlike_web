@@ -8,11 +8,11 @@ export const state = () => ({
   // language
   lang: localStorage.getItem('lang') || 'en',
 
-  // flash message
-  flash: null,
-
-  // show flash
-  showFlash: false,
+  // // flash message
+  // flash: null,
+  //
+  // // show flash
+  // showFlash: false,
 })
 
 export const mutations = {
@@ -29,13 +29,13 @@ export const mutations = {
     localStorage.setItem('lang', lang)
   },
 
-  // flash message
-  flashMessage(state, flash) {
-    state.flash = flash
-  },
-
-  // show flash
-  showFlash(state, showFlash) {
-    state.showFlash = showFlash
-  },
+  // // flash message
+  // flashMessage(state, flash) {
+  //   state.flash = flash
+  // },
+  //
+  // // show flash
+  // showFlash(state, showFlash) {
+  //   state.showFlash = showFlash
+  // },
 }

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <x-flash :flash="flash" />
     <Row :space-x="50">
       <Cell :xl="7" :md="24" class="m-b-20">
         <h2>Create a new repository</h2>
@@ -51,12 +52,11 @@
                   key-name="id"
                   title-name="urlName"
                   placeholder="Select project"
-                  style="flex: 0.9;"
                   @change="selectProjectChange"
                 >
                   <template slot="item" slot-scope="{ item }">
-                    <span>{{ item.urlName }}</span>
-                    <i v-if="item.visibility === 2" class="icon m-l-5">&#xe7c0;</i>
+                    <i v-if="item.visibility === 2" class="icon m-r-5">&#xe7c0;</i>
+                    <span :title="item.name">{{ item.name }}</span>
                   </template>
                 </Select>
                 <span class="h-input-addon">/</span>
@@ -113,20 +113,12 @@
                     <span class="radio-title">Website only</span><br />
                     <span class="radio-desc">
                       Members who have authority can only visit the repository on the website
-                      <a href="#" target="_blank" class="color-color"><i class="icon">&#xe666;</i></a>
+                      <a href="#" target="_blank" class="color-color"><i class="h-icon-help-solid"></i></a>
                     </span>
                   </Radio>
                 </div>
                 <div class="m-t-10">
-                  <Radio
-                    v-model="repo.visibility"
-                    v-tooltip="projectIsPrivate"
-                    placement="bottom-start"
-                    content="Public is not available if the project is private"
-                    theme="white"
-                    :value="1"
-                    :disabled="projectIsPrivate"
-                  >
+                  <Radio v-model="repo.visibility" :value="1">
                     <span class="radio-title">Public</span> <br />
                     <span class="radio-desc">
                       Everyone on the internet can see this project (readonly)
@@ -145,8 +137,9 @@
                   href="http://svnbook.red-bean.com/nightly/en/svn.reposadmin.planning.html#svn.reposadmin.projects.chooselayout"
                   target="_blank"
                   class="color-color"
-                  ><i class="icon">&#xe666;</i></a
                 >
+                  <i class="h-icon-help-solid"></i>
+                </a>
               </span>
             </Checkbox>
           </div>
@@ -167,6 +160,7 @@ const urlPattern = /^[a-z0-9_-]+$/
 export default {
   data() {
     return {
+      flash: null,
       projects: [],
       project: {},
       repo: {
@@ -187,9 +181,6 @@ export default {
   computed: {
     buttonDisabled() {
       return this.repo.name === '' || !urlPattern.test(this.repo.urlName)
-    },
-    projectIsPrivate() {
-      return this.project.visibility === 2
     },
   },
   created() {
@@ -244,7 +235,7 @@ export default {
       }
     },
     getProjectsFromApi() {
-      this.$axios.$get('project?forSelect=1&orderBy=url_name').then((data) => {
+      this.$axios.$get('project?forSelect=1&orderBy=name').then((data) => {
         this.projects = data
       })
     },
@@ -260,7 +251,7 @@ export default {
           })
         })
         .catch((error) => {
-          this.$flash.error(error.message)
+          this.flash = this.$flash.error(error.message)
         })
         .finally(() => {
           this.isLoading = false
