@@ -118,11 +118,18 @@
                   </Radio>
                 </div>
                 <div class="m-t-10">
-                  <Radio v-model="repo.visibility" :value="1" :disabled="projectIsPrivate">
+                  <Radio
+                    v-model="repo.visibility"
+                    v-tooltip="projectIsPrivate"
+                    placement="bottom-start"
+                    content="Public is not available if the project is private"
+                    theme="white"
+                    :value="1"
+                    :disabled="projectIsPrivate"
+                  >
                     <span class="radio-title">Public</span> <br />
                     <span class="radio-desc">
                       Everyone on the internet can see this project (readonly)
-                      <span v-if="projectIsPrivate">, Public will be not available if the project is private</span>
                     </span>
                   </Radio>
                 </div>
