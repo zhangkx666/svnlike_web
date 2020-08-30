@@ -3,22 +3,15 @@ import Vue from 'vue'
 
 Vue.prototype.$flash = {
   error(message) {
-    commitFlashMessage('error', message)
+    return { type: 'error', message }
   },
   success(message) {
-    commitFlashMessage('success', message)
+    return { type: 'success', message }
   },
   warning(message) {
-    commitFlashMessage('warning', message)
+    return { type: 'warning', message }
   },
   info(message) {
-    commitFlashMessage('info', message)
+    return { type: 'info', message }
   },
-  clear() {
-    window.$nuxt.$store.commit('flashMessage', null)
-  },
-}
-
-function commitFlashMessage(type, message) {
-  window.$nuxt.$store.commit('flashMessage', { type, message })
 }
