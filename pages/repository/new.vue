@@ -141,7 +141,12 @@
             <Checkbox v-model="repo.initWithTrunk">
               <span class="m-l-5">
                 <b>Initialize repository with trunk, branches, tags</b>
-                <a href="#" target="_blank" class="color-color"><i class="icon">&#xe666;</i></a>
+                <a
+                  href="http://svnbook.red-bean.com/nightly/en/svn.reposadmin.planning.html#svn.reposadmin.projects.chooselayout"
+                  target="_blank"
+                  class="color-color"
+                  ><i class="icon">&#xe666;</i></a
+                >
               </span>
             </Checkbox>
           </div>
