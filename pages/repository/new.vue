@@ -113,7 +113,9 @@
                     <span class="radio-title">Website only</span><br />
                     <span class="radio-desc">
                       Members who have authority can only visit the repository on the website
-                      <a href="#" target="_blank" class="color-color"><i class="h-icon-help-solid"></i></a>
+                      <a href="http://wiki.svnlike.com/authority#website_only" target="_blank" class="color-color">
+                        <i class="h-icon-help-solid"></i>
+                      </a>
                     </span>
                   </Radio>
                 </div>
@@ -133,11 +135,7 @@
             <Checkbox v-model="repo.initWithTrunk">
               <span class="m-l-5">
                 <b>Initialize repository with trunk, branches, tags</b>
-                <a
-                  href="http://svnbook.red-bean.com/nightly/en/svn.reposadmin.planning.html#svn.reposadmin.projects.chooselayout"
-                  target="_blank"
-                  class="color-color"
-                >
+                <a href="http://wiki.svnlike.com/svn#branch" target="_blank" class="color-color">
                   <i class="h-icon-help-solid"></i>
                 </a>
               </span>
