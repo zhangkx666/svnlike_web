@@ -1,7 +1,5 @@
 <template>
-  <div>
-    Reporitory
-  </div>
+  <div>Reporitory</div>
 </template>
 
 <script>

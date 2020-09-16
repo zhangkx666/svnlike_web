@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a @click="$router.go(-1)">返回上页</a>
+    <a @click="$router.go(-1)">Go Back</a>
   </div>
 </template>
 

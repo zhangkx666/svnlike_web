@@ -1,0 +1,133 @@
+@import (less) "~heyui/themes/var.less";
+
+/************* heyui variable overwrite *************/
+@primary-color: #ff8d00;
+@primary1-color: fade(@primary-color, 45%);
+@primary2-color: fade(@primary-color, 15%);
+@link-color: @primary-color;
+@blue-color: #01AAED; //info
+@green-color: #339933; //success
+@yellow-color: #ff8d00; //warn
+@red-color: #e80000; //error
+
+// height, size
+@input-height: 32px;
+@button-size-l-padding: 12px 20px;
+
+@import (less) "~heyui/themes/common.less";
+
+/************* heyui css overwrite *************/
+@border-color-grey1: #dcdfe6;
+div.h-input-group > .h-input-addon {
+  background-color: #F5F7FA;
+  border-color: @border-color-grey1;
+  padding: 0 12px;
+  color: #909399;
+  display: inline-block;
+
+  &:first-child {
+    border-color: @border-color-grey1;
+  }
+}
+
+.h-select-input-border .h-select-show {
+  border-color: @border-color-grey1;
+}
+
+input[type=text],
+input[type=password],
+input[type=search],
+input[type=number],
+input[type=tel],
+input[type=url],
+input.h-input,
+textarea,
+.h-textarea {
+  width: 100%;
+  color: @dark-color;
+  font-size: 14px;
+  border-color: @border-color-grey1;
+  //padding: 3px 8px 4px;
+}
+
+.h-select-placeholder {
+  color: #CCCFD6;
+}
+
+// https://github.com/heyui/heyui/issues/306
+//.h-select-value-single {
+//  .h-select-value-single {
+//    padding-left: 0;
+//  }
+//}
+
+//input.h-input, .h-textarea {
+//  padding: 4px 8px;
+//}
+div.h-input > [class^="h-icon"], div.h-input > [class*=" h-icon"] {
+  top: 54%;
+}
+
+.h-search > .h-icon-search, .h-search .h-icon-close {
+  top: 54%;
+}
+
+// select: not change after selected
+.h-select .h-select-search-input {
+  line-height: 14px;
+  font-size: 14px;
+}
+
+.h-select-filterable-value {
+  top: 2px;
+  font-size: 14px;
+}
+
+.h-tooltip .h-tooltip-inner {
+  max-width: 300px;
+}
+
+.h-radio-label-disabled {
+  .radio-title, .radio-desc {
+    color: @gray-color;
+  }
+}
+
+.h-tabs {
+  padding-left: 0;
+}
+.h-tabs-default {
+  font-size: 14px;
+  border-bottom: 2px solid #eeeeee;
+
+  .h-tabs-item {
+    margin-bottom: -3px;
+    padding-left: 0;
+    padding-right: 0;
+
+    &:hover, &.h-tabs-item-selected {
+      border-width: 2px;
+    }
+
+    //&:first-child {
+    //  padding-left: 0;
+    //}
+  }
+
+  .h-tabs-item + div {
+    margin-left: 25px;
+  }
+}
+
+.h-btn {
+  padding: 8px 12px;
+}
+
+.h-tag, .h-tag-circle {
+  padding: 6px 10px;
+}
+
+.h-tag-gray {
+  background: #ececec;
+  border-color: #ececec;
+}

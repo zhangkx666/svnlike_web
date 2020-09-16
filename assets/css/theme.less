@@ -1,45 +1,10 @@
-@import "color.less";
-
-// theme: dark, light
-.dark {
-  .header {
-    background: @color-dark-header;
-  }
-
-  .color-contrast {
-    color: #fff !important;
-  }
-
-  .logo-icon:before {
-    color: #fff;
-  }
-
-  .dark-no-border .ant-input {
-    &:hover {
-      border-color: @color-dark-header !important;
-    }
-
-    &:focus {
-      border-color: @color-dark-header !important;
-      box-shadow: none;
-    }
-  }
-}
-
+// theme: light
 .light {
   .header {
     background: #F2F2F2;
     border-bottom: 1px solid #e5e5e5;
     //box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .2);
   }
-
-  .color-contrast {
-    color: @color-dark-header !important;
-  }
-
-  //.logo-icon:before {
-  //  color: @color-dark-header;
-  //}
 }
 
 @themeList: blue, green, orange, purple;
@@ -71,14 +36,26 @@
   }
 
   .@{theme} {
+    a:hover {
+      color: @color;
+    }
+
     .color-color {
-      color: @color !important;
+      color: @color;
+      &:hover {
+        color: darken(@color, 5%);
+      }
     }
 
-    .color-hover:hover {
-      color: @color !important;
+    .color-hover{
+      color: @color-grey-4;
+      &:hover {
+        color: @color;
+      }
     }
-
+    .theme-bg {
+      background-color: @color;
+    }
     .color-color-bg {
       background-color: @color;
     }
@@ -89,9 +66,8 @@
       background-color: @color;
 
       &:hover {
-        //background-color: @color-blue-hover;
-        border-color: @colorHover;
         color: #fff;
+        border-color: @colorHover;
         background-color: @colorHover;
       }
 
@@ -110,7 +86,7 @@
       &.light {
         color: @color;
         border-color: @color;
-        background-color: @bgColor;
+        background-color: white;
 
         &:hover {
           border-color: @color;
@@ -122,18 +98,6 @@
           color: @colorDisabledLight;
           background-color: #fff;
           border-color: @colorDisabledLight;
-        }
-      }
-    }
-
-    .ant-switch {
-      &.ant-switch-checked {
-        background-color: @color;
-        border-color: @color;
-
-        &:hover {
-          background-color: @colorHover;
-          border-color: @colorHover;
         }
       }
     }
@@ -151,40 +115,10 @@
 
     .x-menu {
       .nuxt-link-exact-active {
-        background: @bgColor !important;
+        background: @bgColor;
         border-right-color: @color;
-        color: @color !important;
+        color: @color;
       }
-    }
-
-    .ant-input, .el-input__inner, .el-textarea__inner {
-      &:hover {
-        border-color: @color !important;
-      }
-
-      &:focus {
-        border-color: @color !important;
-        box-shadow: 0 0 0 2px rgba(@color, 0.2);
-      }
-    }
-
-    .ant-btn {
-      &:hover, &:focus {
-        border-color: @color !important;
-        color: @color !important;
-      }
-    }
-
-    .el-loading-spinner .path {
-      stroke: @color !important;
-    }
-
-    .el-tabs__item.is-active, .el-tabs__item:hover {
-      color: @color !important;
-    }
-
-    .el-tabs__active-bar {
-      background-color: @color;
     }
   }
 }

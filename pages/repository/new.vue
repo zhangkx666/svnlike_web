@@ -1,15 +1,11 @@
 <template>
   <div>
-    <x-flash />
+    <flash :message.sync="errorMessage" type="error" />
     <Row :space-x="50">
       <Cell :xl="7" :md="24" class="m-b-20">
-        <h2>Create a new repository</h2>
-        <p>
-          Create a blank repository to house your codes, documents, or other files
-        </p>
-        <p>
-          A repository contains all project files, including the revision history
-        </p>
+        <h1 class="m-b-15">Create a new repository</h1>
+        <p>Create a blank repository to house your codes, documents, or other files</p>
+        <p class="m-t-5">A repository contains all project files, including the revision history</p>
       </Cell>
       <Cell :xl="17" :md="24">
         <form @submit.prevent="submitRepository">
@@ -32,9 +28,7 @@
               />
             </Cell>
           </Row>
-          <div v-if="nameNotAvailable" class="field-error">
-            Please fill in a descriptive name for your repository
-          </div>
+          <div v-if="nameNotAvailable" class="field-error">Please fill in a descriptive name for your repository</div>
 
           <div class="m-t-20 m-b-10">
             <label for="urlName"><b>Repository URL</b></label>
@@ -47,7 +41,7 @@
                   v-model="repo.projectId"
                   :datas="projects"
                   :deletable="false"
-                  :filterable="true"
+                  :filterable="false"
                   :disabled="projectIdDisabled"
                   key-name="id"
                   title-name="urlName"
@@ -66,13 +60,9 @@
           </Row>
           <div v-if="projectIdNotSelected" class="field-error">
             Please select a project, or
-            <nuxt-link to="/project/new" class="color-color">
-              click to create a new project
-            </nuxt-link>
+            <nuxt-link to="/project/new" class="color-color"> click to create a new project </nuxt-link>
           </div>
-          <div v-if="urlNotAvailable" class="field-error">
-            Please fill in a repository URL with no special characters
-          </div>
+          <div v-if="urlNotAvailable" class="field-error">Please fill in a repository URL with no special characters</div>
 
           <div class="m-t-20 m-b-10">
             <label for="desc">
@@ -83,13 +73,7 @@
           <Row>
             <Cell :xl="22" :md="24">
               <div class="relative">
-                <textarea
-                  id="desc"
-                  v-model="repo.description"
-                  rows="4"
-                  placeholder="Repository description"
-                  class="w-p100"
-                />
+                <textarea id="desc" v-model="repo.description" rows="4" placeholder="Repository description" class="w-p100" />
               </div>
             </Cell>
           </Row>
@@ -103,9 +87,7 @@
                 <div class="m-t-5">
                   <Radio v-model="repo.visibility" :value="2">
                     <span class="radio-title">Authorized by subversion</span><br />
-                    <span class="radio-desc">
-                      Members who have authority can access to the repository by this website or any svn client tools
-                    </span>
+                    <span class="radio-desc"> Members who have authority can access to the repository by this website or any svn client tools </span>
                   </Radio>
                 </div>
                 <div class="m-t-10">
@@ -122,9 +104,7 @@
                 <div class="m-t-10">
                   <Radio v-model="repo.visibility" :value="1">
                     <span class="radio-title">Public</span> <br />
-                    <span class="radio-desc">
-                      Everyone on the internet can see this project (readonly)
-                    </span>
+                    <span class="radio-desc"> Everyone on the internet can see this project (readonly) </span>
                   </Radio>
                 </div>
               </div>
@@ -143,9 +123,7 @@
           </div>
 
           <div class="m-t-40">
-            <h-button type="submit" size="l" class="x-btn" :loading="isLoading" :disabled="buttonDisabled">
-              Create repository
-            </h-button>
+            <h-button type="submit" size="l" class="x-btn" :loading="isLoading" :disabled="buttonDisabled"> Create repository </h-button>
           </div>
         </form>
       </Cell>
@@ -158,6 +136,7 @@ const urlPattern = /^[a-z0-9_-]+$/
 export default {
   data() {
     return {
+      errorMessage: null,
       projects: [],
       project: {},
       repo: {
@@ -223,10 +202,7 @@ export default {
     },
     // edit url name
     typeUrlName() {
-      if (
-        (this.repo.urlName === '' || this.repo.name.startsWith(this.repo.urlName)) &&
-        urlPattern.test(this.repo.name)
-      ) {
+      if ((this.repo.urlName === '' || this.repo.name.startsWith(this.repo.urlName)) && urlPattern.test(this.repo.name)) {
         this.repo.urlName = this.repo.name
         this.checkUrl()
       }
@@ -248,7 +224,7 @@ export default {
           })
         })
         .catch((error) => {
-          this.$flash.error(error.message)
+          this.errorMessage = error.message
         })
         .finally(() => {
           this.isLoading = false

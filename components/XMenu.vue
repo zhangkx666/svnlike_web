@@ -40,15 +40,11 @@
 
         <ul class="sub-menu">
           <li>
-            <nuxt-link to="/task/learning/coding">
-              <i class="icon">&#xe6aa;</i> <span class="menu-text">我的任务</span>
-            </nuxt-link>
+            <nuxt-link to="/task/learning/coding"> <i class="icon">&#xe6aa;</i> <span class="menu-text">我的任务</span> </nuxt-link>
           </li>
 
           <li>
-            <nuxt-link to="/task/learning/pool"
-              ><i class="icon">&#xe6cb;</i> <span class="menu-text">任务池</span>
-            </nuxt-link>
+            <nuxt-link to="/task/learning/pool"><i class="icon">&#xe6cb;</i> <span class="menu-text">任务池</span> </nuxt-link>
           </li>
         </ul>
       </li>

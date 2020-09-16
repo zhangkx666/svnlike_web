@@ -6,50 +6,46 @@
       </div>
       <div class="fl-r">
         <nuxt-link to="/project/new">
-          <el-button class="x-btn" native-type="submit" type="primary" size="small">
-            Create project
-          </el-button>
+          <h-button class="x-btn light">Create project</h-button>
         </nuxt-link>
       </div>
       <div class="clear"></div>
     </div>
     <div class="page-content">
-      <el-row class="m-t-20 m-b-10">
-        <el-col :md="8">
+      <Row class="m-t-20">
+        <Cell :xs="24" :sm="12" :md="10" :xl="8">
           <div class="search-project">
-            <el-input v-model="searchText" placeholder="Project" @keyup.enter.native="getProjectList">
-              <i slot="suffix" class="icon icon-search">&#xe634;</i>
-            </el-input>
+            <Search v-model="searchText" class="w-p100" placeholder="Project" @search="getProjectList" />
           </div>
-        </el-col>
-        <el-col :md="16">
+        </Cell>
+        <Cell :xl="16" class="hide-md-and-down">
           <div class="view">
             <i class="icon" :class="{ 'color-color': viewType === 24 }" @click="changeViewType(24)">&#xe663;</i>
             <i class="icon" :class="{ 'color-color': viewType === 12 }" @click="changeViewType(12)">&#xe7b7;</i>
           </div>
-        </el-col>
-      </el-row>
-      <el-row v-loading="loading" :gutter="20" class="projects">
-        <div v-if="showSkeleton">
-          <el-col v-for="idx in 4" :key="idx" :lg="viewType">
-            <template>
-              <a-skeleton :loading="showSkeleton" active :avatar="{ size: 74, shape: 'square' }" class="m-2-30" />
-            </template>
-          </el-col>
-        </div>
-        <el-col v-for="project in likedProjects" :key="project.urlName" :lg="viewType" class="m-b-20">
+        </Cell>
+      </Row>
+      <Row :space="20" class="projects m-t-40">
+        <template v-if="showSkeleton">
+          <Cell v-for="idx in 4" :key="idx" :md="24" :xl="viewType">
+            <Skeleton :loading="showSkeleton" :rows="2" :avatar-size="80" avatar-shape="square" avatar active></Skeleton>
+          </Cell>
+        </template>
+        <Cell v-for="project in likedProjects" :key="project.urlName" :md="24" :xl="viewType">
           <project-card :project="project" :liked="true" @refreshLiked="refreshLiked" />
-        </el-col>
-        <el-col v-for="project in unlikedProjects" :key="project.urlName" :lg="viewType" class="m-b-20">
+        </Cell>
+        <Cell v-for="project in unlikedProjects" :key="project.urlName" :md="24" :xl="viewType">
           <project-card :project="project" :liked="false" @refreshLiked="refreshLiked" />
-        </el-col>
-      </el-row>
+        </Cell>
+        <Loading :loading="loading"></Loading>
+      </Row>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'ProjectIndex',
   data() {
     return {
       loading: true,
@@ -129,8 +125,9 @@ export default {
 
 .view {
   margin-top: 5px;
-  margin-bottom: 20px;
   text-align: right;
+  height: 32px;
+  overflow: hidden;
 
   i {
     font-size: 18px;

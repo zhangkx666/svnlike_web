@@ -14,17 +14,18 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.12.1",
     "@nuxtjs/proxy": "^2.0.1",
+    "git": "^0.1.5",
+    "heyui": "https://github.com/zhangkx666/heyui.git",
+    "lodash": "^4.17.20",
     "nuxt": "^2.14.1",
     "vue": "^2.6.11"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-module": "^2.0.0",
-    "ant-design-vue": "^1.6.4",
     "babel-eslint": "^10.1.0",
     "babel-plugin-component": "^1.1.1",
     "babel-plugin-import": "^1.13.0",
-    "element-ui": "^2.13.2",
     "eslint": "^7.5.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-nuxt": "^1.0.0",

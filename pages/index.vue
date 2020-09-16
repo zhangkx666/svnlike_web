@@ -1,6 +1,6 @@
 <template>
   <div>
-    xxxxxxxxxxxxxxx
+    <nuxt-link to="project"> Project </nuxt-link>
   </div>
 </template>
 

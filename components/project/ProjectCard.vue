@@ -1,24 +1,19 @@
 <template>
   <div v-if="project" class="card">
     <div class="avatar">
-      <nuxt-link :to="'/project/' + project.urlName" class="color-color">
-        <el-image :src="project.avatar || ''" fit="contain" style="width: 74px; height: 74px;">
-          <div
-            slot="error"
-            class="no-avatar color-color"
-            :class="{ two: project.avatarWord && project.avatarWord.length > 1 }"
-            :style="{ color: project.avatarColor ? project.avatarColor + ' !important' : '' }"
-          >
-            {{ project.avatarWord || project.name.substr(0, 1).toUpperCase() }}
-          </div>
-        </el-image>
+      <nuxt-link :to="project.urlName">
+        <div v-if="project.avatar" class="avatar-inner" :style="{ backgroundImage: 'url(' + project.avatar + ')' }" />
+        <div v-else class="no-avatar color-color" :class="{ two: project.avatarWord && project.avatarWord.length > 1 }" :style="{ color: project.avatarColor }">
+          {{ project.avatarWord || project.name.substr(0, 1).toUpperCase() }}
+        </div>
       </nuxt-link>
     </div>
     <div class="content">
       <h2>
-        <nuxt-link :to="'/project/' + project.urlName" class="color-hover">{{ project.name }}</nuxt-link>
+        <nuxt-link :to="project.urlName" class="color-hover">{{ project.name }}</nuxt-link>
+        <i v-if="project.visibility === 2" class="icon icon-16px" title="private">&#xe7c0;</i>
       </h2>
-      <div class="desc">{{ project.description }}</div>
+      <p class="desc">{{ project.description }}</p>
     </div>
     <div class="like">
       <i class="icon icon-like" :class="{ liked: likedInner }" @click="likeProject(project.id)">&#xe9a4;</i>
@@ -42,6 +37,7 @@ export default {
           avatar: '',
           avatarWord: '',
           avatarColor: '',
+          visibility: 0,
         }
       },
     },
@@ -98,7 +94,16 @@ export default {
     width: 80px;
     height: 80px;
     border: 3px solid #fff;
+    border-radius: 3px;
     text-align: center;
+    overflow: hidden;
+
+    .avatar-inner {
+      width: 74px;
+      height: 74px;
+      background-size: cover;
+      background-clip: padding-box;
+    }
   }
 
   .content {
@@ -111,6 +116,7 @@ export default {
 
     .desc {
       margin-top: 15px;
+      white-space: pre-wrap;
     }
   }
 

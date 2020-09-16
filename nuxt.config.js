@@ -45,12 +45,12 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['@/assets/css/main.less'],
+  css: ['@/assets/css/app.less'],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['@/plugins/flash', '@/plugins/antd-ui', '@/plugins/element-ui', '@/plugins/route', '@/plugins/axios'],
+  plugins: ['@/plugins/heyui', '@/plugins/route', '@/plugins/axios', '@/plugins/common'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -92,6 +92,7 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
+    // extractCSS: true,
     loaders: {
       less: {
         lessOptions: {
@@ -99,25 +100,25 @@ export default {
         },
       },
     },
-    babel: {
-      plugins: [
-        [
-          'import',
-          {
-            libraryName: 'ant-design-vue',
-            libraryDirectory: 'es',
-            style: true, // `style: true` 会加载 less 文件
-          },
-        ],
-        [
-          'component',
-          {
-            libraryName: 'element-ui',
-            styleLibraryName: 'theme-chalk',
-          },
-        ],
-      ],
-    },
+    // babel: {
+    //  plugins: [
+    //    [
+    //      'import',
+    //      {
+    //        libraryName: 'ant-design-vue',
+    //        libraryDirectory: 'es',
+    //        style: true, // `style: true` 会加载 less 文件
+    //      },
+    //    ],
+    //    [
+    //      'component',
+    //      {
+    //        libraryName: 'element-ui',
+    //        styleLibraryName: 'theme-chalk',
+    //      },
+    //    ],
+    //  ],
+    // },
   },
   /**
    * loading

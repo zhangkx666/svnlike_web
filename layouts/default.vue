@@ -1,6 +1,6 @@
 <template>
   <div :class="[$store.state.theme, $store.state.themeColor]">
-    <x-header class="header" />
+    <x-header />
     <!--    <x-menu />-->
     <!--    <x-breadcrumb />-->
 
@@ -24,7 +24,7 @@ export default {
 .main {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 15px;
   //min-height: 600px;
   //background: #f5f5f5;
   overflow: hidden;
