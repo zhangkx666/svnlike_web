@@ -3,7 +3,14 @@
     <div class="header-line theme-bg"></div>
     <Row class="header">
       <Cell :xl="16" class="left">
-        <x-logo />
+        <div class="logo">
+          <nuxt-link to="/">
+            <span class="logo-icon">
+              <i class="icon icon-svn color-contrast">&#xe63d;</i>
+              <i class="icon icon-like">&#xe665;</i>
+            </span>
+          </nuxt-link>
+        </div>
         <div class="search-box hide-xs">
           <div class="h-input h-input-suffix-icon">
             <input type="text" />
@@ -14,7 +21,7 @@
       <Cell :xl="8" class="right">
         <DropdownMenu :datas="userMenus" :toggle-icon="false" placement="bottom-end">
           <span class="pointer">
-            <img class="user-avatar" width="28" alt="Z" src="https://secure.gravatar.com/avatar/2572c114125cd3999426d5fd61f25ec6?s=80&d=identicon" />
+            <img class="user-avatar" width="28" alt="Z" src="/avatar/project/p1_e1b6b7d32d7d192965bc076f3f24f1e2.png?1610853497466" />
             <span class="user-name hide-xxs">zhangkx</span>
           </span>
         </DropdownMenu>
@@ -184,12 +191,40 @@ export default {
 }
 
 .header {
+  width: 100%;
   height: 48px;
   padding: 0 15px;
   overflow: hidden;
 
   .left {
     position: relative;
+
+    .logo {
+      display: inline-block;
+      height: 48px;
+      line-height: 48px;
+      padding-top: 3px;
+      overflow: hidden;
+
+      .color-contrast {
+        color: #444;
+      }
+
+      .logo-icon {
+        position: relative;
+        top: -2px;
+
+        .icon-svn,
+        .icon-like {
+          font-size: 56px;
+          -webkit-text-stroke-width: 0;
+        }
+
+        .icon-like {
+          margin-left: -6px;
+        }
+      }
+    }
 
     .search-box {
       position: absolute;

@@ -102,6 +102,7 @@ export default {
       width: 74px;
       height: 74px;
       background-size: cover;
+      background-position: center;
       background-clip: padding-box;
     }
   }

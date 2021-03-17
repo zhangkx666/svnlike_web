@@ -142,6 +142,7 @@ export default {
       repo: {
         name: '',
         projectId: '',
+        projectUrlName: '',
         urlName: '',
         description: '',
         visibility: 2,
@@ -195,17 +196,19 @@ export default {
         this.project = this.projects.filter((project) => {
           return project.id === pid
         })[0]
-        if (this.project.visibility !== 1 && this.repo.visibility === 1) {
-          this.repo.visibility = 2
-        }
+
+        // // if project is 2:private and repo is 3:public, change to
+        // if (this.project.visibility !== 1 && this.repo.visibility === 3) {
+        //   this.repo.visibility = 2 // 2: Authorized by subversion
+        // }
       }
     },
     // edit url name
     typeUrlName() {
-      if ((this.repo.urlName === '' || this.repo.name.startsWith(this.repo.urlName)) && urlPattern.test(this.repo.name)) {
-        this.repo.urlName = this.repo.name
-        this.checkUrl()
-      }
+      // if ((this.repo.urlName === '' || this.repo.name.startsWith(this.repo.urlName)) && urlPattern.test(this.repo.name)) {
+      //   this.repo.urlName = this.repo.name
+      //   this.checkUrl()
+      // }
     },
     getProjectsFromApi() {
       this.$axios.$get('project?forSelect=1&orderBy=name').then((data) => {
@@ -213,14 +216,19 @@ export default {
       })
     },
     submitRepository() {
+      this.repo.projectId = this.project.id
+      this.repo.projectUrlName = this.project.urlName
       this.isLoading = true
       this.$axios
         .$post('repository', this.repo)
         .then((res) => {
           this.$message.success(res.message)
           this.$router.push({
-            name: 'repository-urlName',
-            params: { urlName: this.repo.urlName },
+            name: 'projectUrl-repositoryUrl',
+            params: {
+              projectUrl: this.repo.projectUrlName,
+              repositoryUrl: this.repo.urlName,
+            },
           })
         })
         .catch((error) => {

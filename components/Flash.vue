@@ -5,9 +5,11 @@
     </div>
     <div class="flash-content">
       <ul v-if="messageList" :class="{ many: messageList.length > 1 }">
-        <li v-for="(item, idx) in messageList" :key="idx">
-          {{ item }}
-        </li>
+        <template v-for="(item, idx) in messageList">
+          <li v-if="item !== ''" :key="idx">
+            {{ item }}
+          </li>
+        </template>
       </ul>
       <div :class="{ 'flash-slot': messageList.length > 1 }">
         <slot></slot>

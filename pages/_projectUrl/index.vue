@@ -1,5 +1,7 @@
 <template>
   <div>
+    <flash :message.sync="errorMessage" type="error" />
+
     <Skeleton :loading="showCardSkeleton" :rows="2" :avatar-size="80" avatar-shape="square" avatar active class="m-b-20">
       <project-card v-if="project" :project="project" :liked="likedProjectIds.includes(project.id)" />
     </Skeleton>
@@ -10,7 +12,7 @@
         <div v-if="repositoryList.length > 0">
           <Row class="m-b-10">
             <Cell :xl="16">
-              <span>Total {{ repositoryList.length }} repositories</span>
+              <span>Total {{ repositoryList.length }} {{ repositoryList.length == 1 ? ' repository' : ' repositories' }} </span>
             </Cell>
             <Cell :xl="8">
               <div class="align-right">
@@ -65,14 +67,14 @@
             <input id="name" ref="projectName" v-model="project.name" type="text" placeholder="Project name" class="w-p100" autocomplete="off" autofocus />
           </div>
         </Cell>
-        <Cell :xl="4" :xs="8">
-          <div class="m-b-10">
-            <label for="id"><b>Project ID</b></label>
-          </div>
-          <div>
-            <input id="id" :value="project.id" type="text" autocomplete="off" disabled />
-          </div>
-        </Cell>
+        <!--        <Cell :xl="4" :xs="8">-->
+        <!--          <div class="m-b-10">-->
+        <!--            <label for="id"><b>Project ID</b></label>-->
+        <!--          </div>-->
+        <!--          <div>-->
+        <!--            <input id="id" :value="project.id" type="text" autocomplete="off" disabled />-->
+        <!--          </div>-->
+        <!--        </Cell>-->
       </Row>
 
       <div class="m-t-20 m-b-10">
@@ -119,16 +121,30 @@
         </div>
       </div>
 
+      <div class="m-t-25 m-b-10">
+        <label><b>Avatar</b></label>
+      </div>
+      <div class="relative" style="height: 72px">
+        <avatar-uploader :max-size-m="1" avatar-type="project" :data-id="project.id" :avatar-src="project.avatar" @refreshAvatar="refreshAvatar" />
+        <div class="avatar-or">or</div>
+        <div class="inline-block">
+          <input id="avatar_word" v-model="project.avatarWord" type="text" autocomplete="off" placeholder="Avatar text" maxlength="3" style="width: 100px" />
+          <ColorPicker v-model="project.avatarColor" :colors="['#01aaed', '#339933', '#ff8d00', '#9a12b3']"></ColorPicker>
+        </div>
+      </div>
+
       <div class="m-t-40">
-        <h-button type="submit" size="l" class="x-btn" :loading="isLoading">Save changes</h-button>
+        <h-button type="submit" size="l" class="x-btn" :loading="isLoading" @click="updateProject">Save changes</h-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import AvatarUploader from '~/components/AvatarUploader'
 export default {
   name: 'ProjectHome',
+  components: { AvatarUploader },
   data() {
     return {
       tabs: ['Repositories', 'Members', 'Settings'],
@@ -140,6 +156,8 @@ export default {
       repositoryList: null,
       likedProjectIds: [],
       showCardSkeleton: true,
+      isLoading: false,
+      errorMessage: null,
     }
   },
   computed: {
@@ -190,8 +208,38 @@ export default {
       })
       this.$router.push({ name: 'repository-new' })
     },
+    // refresh avatar
+    refreshAvatar(args) {
+      if (args.avatar) {
+        this.project.avatar = args.avatar
+      }
+    },
+    // update project
+    updateProject() {
+      this.isLoading = true
+      this.$axios
+        .$put('project/' + this.project.id, this.project)
+        .then((res) => {
+          this.$message.success(res.message)
+          this.$router.push({
+            name: 'projectUrl',
+            params: { projectUrl: this.project.urlName },
+          })
+        })
+        .catch((error) => {
+          this.errorMessage = error.message
+        })
+        .finally(() => {
+          this.isLoading = false
+        })
+    },
   },
 }
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.avatar-or {
+  display: inline-block;
+  margin: 22px 22px 22px 18px;
+}
+</style>

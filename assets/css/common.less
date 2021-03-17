@@ -156,3 +156,62 @@ b, strong, .bold {
   border-left: 3px solid @color-orange;
   padding-left: 10px;
 }
+
+// table
+.table {
+  width: 100%;
+  border-collapse:collapse;
+  th {
+    color: #333;
+    font-weight: normal;
+    padding: 10px 10px;
+    border-bottom: 1px solid #d9d9d9;
+    background: #F3F3F3;
+  }
+
+  td {
+    color: #5e5e5e;
+    padding: 10px 10px;
+    border-bottom: 1px solid #d9d9d9;
+
+    &.no-padding-top-bottom {
+      padding: 0 5px;
+    }
+  }
+
+  tbody tr:hover {
+    background: #f4f4f4;
+  }
+
+  tr:last-child {
+    td {
+      border-bottom: none;
+    }
+  }
+
+  &.table-list {
+    .title {
+      a {
+        color: #6e6e6e;
+        &:hover {
+          color: #1CACEE;
+        }
+      }
+    }
+    .desc {
+      margin-top: 5px;
+      color: #AEAEAE;
+      a {
+        color: #677076;
+        &:hover {
+          color: #1CACEE;
+        }
+      }
+    }
+    .child {
+      td:first-child{
+        padding-left: 45px;
+      }
+    }
+  }
+}

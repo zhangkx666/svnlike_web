@@ -1,7 +1,7 @@
 <template>
   <div v-if="repo" class="card">
     <div class="avatar">
-      <nuxt-link :to="repo.urlName">
+      <nuxt-link :to="repo.projectUrlName + '/' + repo.urlName">
         <div v-if="repo.avatar" class="avatar-inner" :style="{ backgroundImage: 'url(' + repo.avatar + ')' }" />
         <div v-else class="no-avatar color-color" :class="{ two: repo.avatarWord && repo.avatarWord.length > 1 }" :style="{ color: repo.avatarColor }">
           {{ repo.avatarWord || repo.name.substr(0, 1).toUpperCase() }}
@@ -10,13 +10,13 @@
     </div>
     <div class="content">
       <h4>
-        <nuxt-link :to="repo.urlName" class="color-hover">{{ repo.name }}</nuxt-link>
+        <nuxt-link :to="repo.projectUrlName + '/' + repo.urlName" class="color-hover">{{ repo.name }}</nuxt-link>
         <i v-if="repo.visibility === 2" class="icon icon-16px" title="private">&#xe7c0;</i>
       </h4>
       <p class="desc">{{ repo.description }}</p>
     </div>
     <div class="like">
-      <i class="icon icon-like" :class="{ liked: likedInner }" @click="likeRepo(repo.id)">&#xe9a4;</i>
+      <!-- <i class="icon icon-like" :class="{ liked: likedInner }" @click="likeRepo(repo.id)">&#xe9a4;</i>-->
     </div>
   </div>
 </template>
@@ -72,6 +72,7 @@ export default {
       width: 40px;
       height: 40px;
       background-size: cover;
+      background-position: center;
       background-clip: padding-box;
     }
 
@@ -89,7 +90,7 @@ export default {
     }
 
     .desc {
-      margin-top: 8px;
+      margin-top: 5px;
       white-space: pre-wrap;
     }
   }
