@@ -7,10 +7,16 @@
       <use xlink:href="#icon-word"></use>
     </svg>
     <i v-if="ext === 'png' || ext === 'gif' || ext === 'jpg' || ext === 'jpeg' || ext === 'bmp'" class="icon color-green">&#xe652;</i>
-    <i v-if="ext === 'txt'" class="icon color-dark-grey">&#xe712;</i>
+    <!--    <i v-if="ext === 'txt'" class="icon color-dark-grey">&#xe712;</i>-->
+    <svg v-if="ext === 'txt'" class="icon s13em" aria-hidden="true">
+      <use xlink:href="#icon-txt"></use>
+    </svg>
+    <svg v-if="ext === 'xml'" class="icon s13em" aria-hidden="true">
+      <use xlink:href="#icon-m-xml"></use>
+    </svg>
     <!--<i class="fas fa-file-code color-dark-grey" style="font-size: 1.2em" v-if="ext === 'java'"></i>-->
     <i v-if="ext === 'java'" class="icon color-dark-grey">&#xe651;</i>
-    <i v-if="ext === 'xml'" class="icon">&#xe6cc;</i>
+    <!--    <i v-if="ext === 'xml'" class="icon">&#xe6cc;</i>-->
     <i v-if="ext === 'sql'" class="icon color-danger">&#xe621;</i>
     <i v-if="ext === 'json'" class="icon color-dark-grey">&#xe72a;</i>
     <svg v-if="ext === 'vue'" class="icon s13em" aria-hidden="true"><use xlink:href="#icon-vuejs"></use></svg>
@@ -18,7 +24,10 @@
 
     <i v-if="ext === 'cmd'" class="icon color-dark-grey">&#xe65b;</i>
     <!--<i class="fab fa-markdown" style="font-size: 1.2em" v-if="ext === 'md'"></i>-->
-    <i v-if="ext === 'md'" class="icon color-dark-grey">&#xe6cf;</i>
+    <!--    <i v-if="ext === 'md'" class="icon color-dark-grey">&#xe6cf;</i>-->
+    <svg v-if="ext === 'md'" class="icon s13em" aria-hidden="true">
+      <use xlink:href="#icon-file-markdown"></use>
+    </svg>
     <i v-if="ext === '7z' || ext === 'zip' || ext === 'rar'" class="icon color-danger">&#xe62f;</i>
     <svg v-if="ext === 'rb'" class="icon s13em" aria-hidden="true">
       <use xlink:href="#icon-creditlevel"></use>

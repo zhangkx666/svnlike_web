@@ -1,20 +1,14 @@
 <template>
   <div>
     <div class="file-title">
-      <router-link
-        v-if="file.parentPath != null && displayInFile"
-        class="back"
-        title="返回到目录"
-        :to="'/svn/repository/' + $route.params.name + '/tree?path=' + file.parentPath"
-      >
+      <nuxt-link v-if="file.parentPath != null && displayInFile" class="back" :to="'/svn/repository/' + $route.params.name + '/tree?path=' + file.parentPath">
         <i class="icon">&#xe631;</i>
-      </router-link>
-
-      <file-icon v-if="displayInFile" :extension="file.ext" class="m-r-5" />
+      </nuxt-link>
+      <file-icon :extension="file.ext" class="m-r-5" />
       <span class="bold">{{ file.name }}</span>
       <template v-if="displayInFile">
-        <span class="color-grey m-l-10">{{ file.size | showFileSize }}</span>
-        <span class="color-grey m-l-10">版本: {{ file.rev }}</span>
+        <span class="color-grey m-l-10">{{ file.size | formatSize }}</span>
+        <span class="color-grey m-l-10">Revision: {{ file.rev }}</span>
       </template>
     </div>
     <div class="file-content">
@@ -24,8 +18,10 @@
 </template>
 
 <script>
+import FileIcon from '@/components/common/FileIcon'
 export default {
   name: 'FileBox',
+  components: { FileIcon },
   props: {
     file: {
       type: Object,
@@ -41,7 +37,7 @@ export default {
 
 <style lang="less" scoped>
 .file-title {
-  background: #fafafa;
+  background: #f3f3f3;
   border: 1px solid #e5e5e5;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;

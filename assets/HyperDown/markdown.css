@@ -1,0 +1,202 @@
+.markdown {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", Tahoma, Arial, sans-serif, "Helvetica Neue", Helvetica, "PingFang SC", 微软雅黑, Tahoma, Arial, sans-serif;
+}
+.markdown ul,
+.markdown ol {
+    padding: 0;
+}
+
+.markdown p {
+    line-height: 200%;
+    color: #636363;
+}
+.markdown a {
+    color: #B34E22;
+}
+.markdown a:hover {
+    color: #009688;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+    color: #0B8CD6;
+    font-weight: 500;
+}
+
+.markdown h1 {
+    color: #0B8CD6;
+    margin: 30px 0 15px;
+    font-size: 30px;
+}
+
+.markdown h2 {
+    margin: 25px 0 15px;
+    font-size: 26px;
+}
+
+.markdown h3 {
+    margin-top: 20px;
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 1.5;
+}
+
+.markdown h4 {
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 1.5;
+}
+.markdown h5 {
+    margin-top: 10px;
+    font-size: 16px;
+}
+.markdown h6 {
+    margin-top: 5px;
+    font-size: 15px;
+}
+.markdown .footnotes {
+    margin-top: 80px;
+}
+.markdown .footnotes .footnote-backref {
+    line-height: 200%;
+}
+
+.markdown ul > li {
+    list-style: disc;
+    margin-left: 30px;
+    color: #858585;
+}
+.markdown ul > li.select,
+.markdown ul > li.unselect {
+    list-style: none;
+}
+.markdown ul > li.select > p,
+.markdown ul > li.unselect > p {
+    display: inline-block;
+    margin-left: 10px;
+}
+.markdown ul > li.select:before,
+.markdown ul > li.unselect:before{
+    font-family:"iconfont" !important;
+    font-size:16px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+}
+.markdown ul > li.select:before {
+    position: relative;
+    top: 1px;
+    content: '\e64e';
+}
+.markdown ul > li.unselect:before {
+    content: '\e646';
+}
+.markdown ol > li {
+    list-style: decimal;
+    margin-left: 30px;
+    color: #6b6b6b;
+}
+
+.markdown hr {
+    border: 0;
+    border-bottom: 1px dashed #cfcfcf;
+    background: none;
+    margin: 5px 0 20px;
+    clear: none;
+}
+
+.markdown blockquote {
+    padding: 8px 5px 8px 15px;
+    color: #555;
+    background: #f7f7f7;
+    border-left: 4px solid #cfcfcf;
+    margin: 10px 0 20px 0;
+}
+.markdown pre {
+    padding: 16px;
+    overflow: auto;
+    /*font-size: 85%;*/
+    line-height: 1.5;
+    background-color: #F2F2F2;
+    border: 0;
+    border-radius: 3px;
+    font-family: Consolas, Courier, "Microsoft YaHei", monospace;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.markdown p code {
+    padding: 3px 6px 4px;
+    font-size: 90%;
+    background-color: rgb(251, 220, 182);
+    border: 0;
+    border-radius: 3px;
+    font-family: Consolas, Courier, "Microsoft YaHei", monospace;
+}
+
+.markdown code {
+    font-family: Consolas, Courier, "Microsoft YaHei", monospace;
+}
+
+
+.markdown img {
+    max-width: 100%;
+    border: 1px solid #fefefe;
+    box-shadow: rgba(0,0,0,0.35) 0px 0px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/*.article-show .markdown img {*/
+/*    cursor: url("/public/img/zoom-in.ico"), default;*/
+/*}*/
+img.zoom-out {
+    max-width: 100%;
+}
+.markdown img.face {
+    border: none;
+    box-shadow: none;
+    margin: 0 3px;
+    transform: translateY(-2px);
+}
+
+.markdown .footnote-ref {
+    vertical-align: baseline;
+    top: -2px;
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+}
+
+/* table */
+.markdown table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: block;
+    width: 100%;
+    overflow: auto;
+    word-break: keep-all;
+    margin-top: 20px;
+}
+.markdown table thead tr{
+    background: #F2F2F2;
+}
+.markdown table th,
+.markdown table td {
+    padding: 5px 15px;
+    border: 1px solid #ddd;
+}
+.markdown table th {
+    font-weight: bold;
+}
+.markdown table > tbody > tr:nth-child(odd) {
+    background: #fff;
+}
+.markdown table > tbody > tr:nth-child(even) {
+    background: #F2F2F2;
+}
