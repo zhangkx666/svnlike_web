@@ -18,3 +18,8 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+
+> less-loader should be 7.3.0
+> 
+`less-loader": "^7.3.0",`
